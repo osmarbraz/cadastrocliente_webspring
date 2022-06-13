@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="pt-br" xml:lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title>Cadastro de Cliente - Consultar</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Cadastro de Cliente - Consultar</h1>     
+        <span class='mensagemConsultar'> <span th:text="${cliente.mensagem}" /></span></span><br><br>
+        <div th:if="${cliente.clienteId != -1}">
+            ClienteId : <span th:text="${cliente.clienteId}"></span><br>
+            Nome : <span th:text="${cliente.nome}"></span><br>
+            CPF: <span th:text="${cliente.cpf}"></span><br>
+        </div>
+        <p><a th:href="@{FrmClienteConsultar}">Consultar</a> - <a th:href="@{/}">Menu</a></p>
+    </body>
+</html>

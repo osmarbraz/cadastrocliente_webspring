@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<!-- https://spring.io/guides/gs/handling-form-submission/ -->
+<html lang="pt-br" xml:lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title>Cadastro de Cliente - Incluir</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Cadastro de Cliente - Incluir</h1>     
+        <span th:text="'Mensagem: ' + ${cliente.mensagem}"></span><br>
+        <p><a th:href="@{FrmClienteIncluir}">Incluir</a> - <a th:href="@{/}">Menu</a></p>
+    </body>
+</html>

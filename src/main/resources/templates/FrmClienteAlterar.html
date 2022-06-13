@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="pt-br" xml:lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title>Cadastro de Cliente - Alterar</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Cadastro de Cliente - Alterar</h1>
+        <form action="#" th:action="@{/ClienteAlterar}" th:object="${cliente}" method="post">
+            ClienteId: <input type="text" th:field="*{clienteId}" /><br><br>
+            Nome: <input type="text" size="100" th:field="*{nome}" /><br><br>
+            CPF (Somente números): <input type="text" th:field="*{cpf}" /><br><br>
+            <input type="reset" value="Limpar">
+            <input type="submit" name="Alterar" value="Alterar"> <br>
+        </form>   
+        <br>
+        <a th:href="@{/}">Menu</a>
+    </body> 
+</html>

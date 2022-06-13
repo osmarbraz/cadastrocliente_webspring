@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xml:lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Cadastro de Cliente - Listar</title>
+    </head>
+    <body>
+        <h1>Cadastro de Cliente - Listar</h1>
+        <table border="1">    
+            <caption>Lista de clientes</caption>
+            <thead>
+                <tr>
+                    <th scope="col">ClienteId</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">CPF</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${clientes.empty}">
+                    <td colspan="3"> Não existem clientes cadastrados.</td>
+                </tr>
+                <tr th:each="cliente : ${clientes}">
+                    <td><span th:text="${cliente.clienteId}"> Cliente </span></td>
+                    <td><span th:text="${cliente.nome}"> Nome </span></td>
+                    <td><span th:text="${cliente.cpf}"> CPF </span></td>
+                </tr>
+            </tbody>
+        </table>              
+        <p><a th:href="@{/}">Menu</a> </p>
+    </body>
+</html>
