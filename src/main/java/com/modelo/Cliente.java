@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 /**
  * Objeto modelo do sistema.
- * 
+ *
  * @author osmar
  */
 @Entity

@@ -16,6 +16,7 @@ import com.modelo.Cliente;
 
 /**
  * Classe de controle de cliente.
+ *
  * @author osmar
  */
 @Controller
@@ -49,7 +50,7 @@ public class ClienteController {
         }
         return "ClienteIncluir";
     }
-    
+
     @PostMapping("/ClienteAlterar")
     public String ClienteAltear(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         model.addAttribute("cliente", clienteFrm);
@@ -60,7 +61,7 @@ public class ClienteController {
             Cliente cliente = new Cliente();
             //Copia os dados do formulário para a entidade
             nonNullCopyProperties(clienteFrm, cliente);
-            
+
             int resultado = clienteServico.alterar(cliente);
             if (resultado != 0) {
                 clienteFrm.setMensagem("Alteração realizada com sucesso.");

@@ -2,11 +2,11 @@ package com.formulario;
 
 /**
  * Classe base(bean) para o formulário de cliente.
- * 
+ *
  * @author osmar
  */
 public class ClienteFrm {
-    
+
     private Integer clienteId;
 
     private String nome;

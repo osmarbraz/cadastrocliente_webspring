@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Data Acesse Objeto de Cliente.
- * 
+ *
  * @author osmar
  */
 @Repository

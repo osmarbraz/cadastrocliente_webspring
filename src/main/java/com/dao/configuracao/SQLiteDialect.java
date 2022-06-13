@@ -119,7 +119,7 @@ public class SQLiteDialect extends Dialect {
     public String getForUpdateString() {
         return "";
     }
-    
+
     @Override
     public boolean supportsOuterJoinForUpdate() {
         return false;
