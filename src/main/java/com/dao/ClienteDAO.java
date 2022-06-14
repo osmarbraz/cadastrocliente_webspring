@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.modelo.Cliente;
+import com.entidade.Cliente;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

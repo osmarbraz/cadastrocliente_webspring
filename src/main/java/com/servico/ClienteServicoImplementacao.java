@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static com.util.Util.nonNullCopyProperties;
 import com.dao.ClienteDAO;
-import com.modelo.Cliente;
+import com.entidade.Cliente;
 
 /**
  * Implementação dos serviços de cliente.

@@ -12,7 +12,7 @@ import com.util.Valida;
 import static com.util.Util.nonNullCopyProperties;
 import com.servico.ClienteServico;
 import com.formulario.ClienteFrm;
-import com.modelo.Cliente;
+import com.entidade.Cliente;
 
 /**
  * Classe de controle de cliente.

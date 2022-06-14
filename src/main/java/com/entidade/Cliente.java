@@ -1,4 +1,4 @@
-package com.modelo;
+package com.entidade;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +17,26 @@ public class Cliente {
     private String nome;
 
     private String cpf;
+
+    /**
+     * Construtor sem argumentos da classe.
+     */
+    public Cliente() {
+        this(0, "", "");
+    }
+
+    /**
+     * Construtor com argumentos da classe.
+     *
+     * @param clienteId
+     * @param nome
+     * @param cpf
+     */
+    public Cliente(Integer clienteId, String nome, String cpf) {
+        setClienteId(clienteId);
+        setNome(nome);
+        setCpf(cpf);
+    }
 
     /**
      * @return the id
@@ -62,9 +82,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cleinte{"
-                + "clienteId=" + clienteId
-                + ", nome'" + nome + '\''
-                + ", cpf='" + cpf + ')';
+      return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
     }
 }

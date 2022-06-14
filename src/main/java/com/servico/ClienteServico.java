@@ -1,6 +1,6 @@
 package com.servico;
 
-import com.modelo.Cliente;
+import com.entidade.Cliente;
 import java.util.List;
 
 /**
