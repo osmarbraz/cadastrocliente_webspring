@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.util.Valida;
 import static com.util.Util.nonNullCopyProperties;
@@ -21,6 +20,8 @@ import com.entidade.Cliente;
  */
 @Controller
 public class ClienteControle {
+    
+    private static final String CLIENTE = "cliente"; 
 
     @Autowired
     private final ClienteServico clienteServico;
@@ -36,7 +37,7 @@ public class ClienteControle {
 
     @PostMapping("/ClienteIncluir")
     public String clienteIncluir(@ModelAttribute ClienteFrm clienteFrm, Model model) {
-        model.addAttribute("cliente", clienteFrm);
+        model.addAttribute(CLIENTE, clienteFrm);
         Valida valida = new Valida();
         boolean cpfValido = valida.validaCPF(clienteFrm.getCpf());
         if (cpfValido) {
@@ -57,7 +58,7 @@ public class ClienteControle {
 
     @PostMapping("/ClienteAlterar")
     public String clienteAltear(@ModelAttribute ClienteFrm clienteFrm, Model model) {
-        model.addAttribute("cliente", clienteFrm);
+        model.addAttribute(CLIENTE, clienteFrm);
         Valida valida = new Valida();
         boolean cpfValido = valida.validaCPF(clienteFrm.getCpf());
         if (cpfValido) {
@@ -91,7 +92,7 @@ public class ClienteControle {
             clienteFrm.setClienteId(-1);
         }
 
-        model.addAttribute("cliente", clienteFrm);
+        model.addAttribute(CLIENTE, clienteFrm);
         return "ClienteConsultar";
     }
 
@@ -112,7 +113,7 @@ public class ClienteControle {
 
     @GetMapping("/FrmClienteIncluir")
     public String frmClienteIncluir(Model model) {
-        model.addAttribute("cliente", new ClienteFrm());
+        model.addAttribute(CLIENTE, new ClienteFrm());
         return "FrmClienteIncluir";
     }
 
