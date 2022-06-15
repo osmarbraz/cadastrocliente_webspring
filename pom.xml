@@ -143,8 +143,8 @@
                     </execution>
                 </executions>
             </plugin>
-            
-            <plugin>
+                      
+             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>3.2.1</version>
@@ -152,8 +152,8 @@
                     <from>
                         <image>springbootjib</image>
                     </from>
-                    <to>
-                        <image>osmarbraz/cadastrocliente_webspring:${project.version}</image>                      
+                    <to>                        
+                        <image>osmarbraz/cadastrocliente_webspring:${project.version}</image>
                         <auth>
                             <username>
                                 ${env.DOCKERHUB_USERNAME}
@@ -162,8 +162,14 @@
                                 ${env.DOCKERHUB_TOKEN}
                             </password>
                         </auth>
-                    </to>                                 
+                    </to>
                 </configuration>
+            </plugin>
+
+            
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
             </plugin>
 
         </plugins>
