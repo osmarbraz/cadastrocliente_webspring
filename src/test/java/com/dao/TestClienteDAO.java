@@ -122,6 +122,6 @@ class TestClienteDAO {
         
         List clientes = (List<Cliente>) DAO.findAll();
         
-        assertThat(clientes).size().isGreaterThan(0);
+        assertThat(clientes).size().isPositive();
     }
 }

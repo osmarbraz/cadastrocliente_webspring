@@ -31,10 +31,11 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     @Override
     public int alterar(Cliente cliente) {
-        Integer id = cliente.getClienteId();
-        Cliente oCliente = clienteDAO.findById(id).get();
-        nonNullCopyProperties(cliente, oCliente);
-        if (clienteDAO.save(oCliente) != null) {
+        Integer id = cliente.getClienteId();        
+        if (clienteDAO.findById(id).isPresent()) {
+            Cliente oCliente = clienteDAO.findById(id).get();
+            nonNullCopyProperties(cliente, oCliente);
+            clienteDAO.save(oCliente);
             return 1;
         } else {
             return -1;

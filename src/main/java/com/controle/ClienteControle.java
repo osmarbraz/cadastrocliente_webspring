@@ -35,7 +35,7 @@ public class ClienteControle {
     }
 
     @PostMapping("/ClienteIncluir")
-    public String ClienteIncluir(@ModelAttribute ClienteFrm clienteFrm, Model model) {
+    public String clienteIncluir(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         model.addAttribute("cliente", clienteFrm);
         Valida valida = new Valida();
         boolean cpfValido = valida.validaCPF(clienteFrm.getCpf());
@@ -56,7 +56,7 @@ public class ClienteControle {
     }
 
     @PostMapping("/ClienteAlterar")
-    public String ClienteAltear(@ModelAttribute ClienteFrm clienteFrm, Model model) {
+    public String clienteAltear(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         model.addAttribute("cliente", clienteFrm);
         Valida valida = new Valida();
         boolean cpfValido = valida.validaCPF(clienteFrm.getCpf());
@@ -79,7 +79,7 @@ public class ClienteControle {
     }
 
     @PostMapping("/ClienteConsultar")
-    public String ClienteConsultar(@ModelAttribute ClienteFrm clienteFrm, Model model) {
+    public String clienteConsultar(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         //Consulta o cliente
         Cliente cliente = clienteServico.getClientePeloId(clienteFrm.getClienteId());
         if (cliente != null) {
@@ -96,7 +96,7 @@ public class ClienteControle {
     }
 
     @PostMapping("/ClienteExcluir")
-    public String ClienteExcluir(@ModelAttribute ClienteFrm clienteFrm, Model model) {
+    public String clienteExcluir(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         Cliente cliente = new Cliente();
         //Copia os dados do formulário para a entidade
         nonNullCopyProperties(clienteFrm, cliente);
@@ -111,31 +111,31 @@ public class ClienteControle {
     }
 
     @GetMapping("/FrmClienteIncluir")
-    public String FrmClienteIncluir(Model model) {
+    public String frmClienteIncluir(Model model) {
         model.addAttribute("cliente", new ClienteFrm());
         return "FrmClienteIncluir";
     }
 
     @GetMapping("/FrmClienteAlterar")
-    public String FrmClienteAlterar(Model model) {
+    public String frmClienteAlterar(Model model) {
         model.addAttribute("cliente", new ClienteFrm());
         return "FrmClienteAlterar";
     }
 
     @GetMapping("/FrmClienteExcluir")
-    public String FrmClienteExcluir(Model model) {
+    public String frmClienteExcluir(Model model) {
         model.addAttribute("cliente", new ClienteFrm());
         return "FrmClienteExcluir";
     }
 
     @GetMapping("/FrmClienteConsultar")
-    public String FrmClienteConsultar(Model model) {
+    public String frmClienteConsultar(Model model) {
         model.addAttribute("cliente", new ClienteFrm());
         return "FrmClienteConsultar";
     }
 
     @GetMapping("/FrmClienteListar")
-    public String FrmClienteListar(Model model) {
+    public String frmClienteListar(Model model) {
         model.addAttribute("clientes", clienteServico.getLista());
         return "FrmClienteListar";
     }

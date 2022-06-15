@@ -31,7 +31,7 @@ class TestClienteServico {
      * Testa a inserção de um cliente existente através do serviço.
      */
     @Test
-    public void testInserir() {
+    void testInserir() {
         //Instancia um cliente para testes
         Cliente cliente = new Cliente(131, "Cliente Existente", "11111111111");               
         doReturn(cliente).when(DAO).save(any());
