@@ -17,7 +17,7 @@ jobs:
     # Compila com diversas versões do JDK
     strategy:
       matrix: 
-        java: [16, 17, 18]
+        java: [18]
     name: build-dev - Teste com JDK ${{ matrix.java }}
     steps:
     # Utiliza a action checkout para fazer o git clone no runner
