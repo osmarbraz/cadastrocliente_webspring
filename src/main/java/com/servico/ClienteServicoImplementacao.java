@@ -32,8 +32,9 @@ public class ClienteServicoImplementacao implements ClienteServico {
     @Override
     public int alterar(Cliente cliente) {
         Integer id = cliente.getClienteId();        
-        if (clienteDAO.findById(id).isPresent()) {
-            Cliente oCliente = clienteDAO.findById(id).get();
+        Optional<Cliente> clienteAlterar = clienteDAO.findById(id);
+        if (clienteAlterar.isPresent()) {
+            Cliente oCliente = clienteAlterar.get();
             nonNullCopyProperties(cliente, oCliente);
             clienteDAO.save(oCliente);
             return 1;
