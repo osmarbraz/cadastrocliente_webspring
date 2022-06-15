@@ -20,10 +20,14 @@ import com.entidade.Cliente;
  * @author osmar
  */
 @Controller
-public class ClienteController {
+public class ClienteControle {
 
     @Autowired
-    private ClienteServico clienteServico;
+    private final ClienteServico clienteServico;
+    
+    public ClienteControle(ClienteServico clienteServico){
+        this.clienteServico = clienteServico;
+    }
 
     @RequestMapping("/")
     public String menu() {

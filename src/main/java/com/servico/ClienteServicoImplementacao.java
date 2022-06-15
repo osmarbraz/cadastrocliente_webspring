@@ -18,7 +18,11 @@ import com.entidade.Cliente;
 public class ClienteServicoImplementacao implements ClienteServico {
 
     @Autowired
-    private ClienteDAO clienteDAO;
+    private final ClienteDAO clienteDAO;
+    
+     public ClienteServicoImplementacao(ClienteDAO clienteDAO) {
+        this.clienteDAO = clienteDAO;
+    }
 
     @Override
     public boolean inserir(Cliente cliente) {
