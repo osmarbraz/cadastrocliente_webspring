@@ -29,7 +29,7 @@ public class ClienteControle {
         this.clienteServico = clienteServico;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String menu() {
         return "menu";
     }

@@ -9,6 +9,8 @@ import org.hibernate.dialect.function.VarArgsSQLFunction;
 import org.hibernate.type.StringType;
 
 public class SQLiteDialect extends Dialect {
+    
+    private static final String SUBSTR = "substr"; 
 
     public SQLiteDialect() {
         registerColumnType(Types.BIT, "integer");
@@ -29,16 +31,15 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.TIMESTAMP, "timestamp");
         registerColumnType(Types.BINARY, "blob");
         registerColumnType(Types.VARBINARY, "blob");
-        registerColumnType(Types.LONGVARBINARY, "blob");
-        // registerColumnType(Types.NULL, "null");
+        registerColumnType(Types.LONGVARBINARY, "blob");        
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
         registerColumnType(Types.BOOLEAN, "integer");
 
         registerFunction("concat", new VarArgsSQLFunction(StringType.INSTANCE, "", "||", ""));
         registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
-        registerFunction("substr", new StandardSQLFunction("substr", StringType.INSTANCE));
-        registerFunction("substring", new StandardSQLFunction("substr", StringType.INSTANCE));
+        registerFunction(SUBSTR, new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
+        registerFunction("substring", new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
     }
 
     public boolean supportsIdentityColumns() {
@@ -57,10 +58,12 @@ public class SQLiteDialect extends Dialect {
         return "select last_insert_rowid()";
     }
 
+    @Override
     public boolean supportsLimit() {
         return true;
     }
 
+    @Override
     protected String getLimitString(String query, boolean hasOffset) {
         return new StringBuffer(query.length() + 20).
                 append(query).
