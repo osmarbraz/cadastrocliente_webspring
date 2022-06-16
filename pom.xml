@@ -201,7 +201,7 @@
                         <image>openjdk:alpine</image>
                     </from>
                     <to>                        
-                        <image>osmarbraz/cadastrocliente_webspring:${project.version}</image>
+                        <image>osmarbraz/${project.artifactId}:${project.version}</image>
                         <auth>
                             <username>
                                 ${env.DOCKERHUB_USERNAME}
