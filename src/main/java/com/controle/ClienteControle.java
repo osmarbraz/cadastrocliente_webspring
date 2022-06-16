@@ -107,7 +107,7 @@ public class ClienteControle {
         } else {
             clienteFrm.setMensagem("Exclusão não realizada.");
         }
-        model.addAttribute("cliente", clienteFrm);
+        model.addAttribute(CLIENTE, clienteFrm);
         return "ClienteExcluir";
     }
 
@@ -119,25 +119,25 @@ public class ClienteControle {
 
     @GetMapping("/FrmClienteAlterar")
     public String frmClienteAlterar(Model model) {
-        model.addAttribute("cliente", new ClienteFrm());
+        model.addAttribute(CLIENTE, new ClienteFrm());
         return "FrmClienteAlterar";
     }
 
     @GetMapping("/FrmClienteExcluir")
     public String frmClienteExcluir(Model model) {
-        model.addAttribute("cliente", new ClienteFrm());
+        model.addAttribute(CLIENTE, new ClienteFrm());
         return "FrmClienteExcluir";
     }
 
     @GetMapping("/FrmClienteConsultar")
     public String frmClienteConsultar(Model model) {
-        model.addAttribute("cliente", new ClienteFrm());
+        model.addAttribute(CLIENTE, new ClienteFrm());
         return "FrmClienteConsultar";
     }
 
     @GetMapping("/FrmClienteListar")
     public String frmClienteListar(Model model) {
-        model.addAttribute("clientes", clienteServico.getLista());
+        model.addAttribute(CLIENTE, clienteServico.getLista());
         return "FrmClienteListar";
     }
 }
