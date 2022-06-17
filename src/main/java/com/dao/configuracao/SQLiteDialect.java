@@ -1,12 +1,17 @@
 package com.dao.configuracao;
 
 import java.sql.Types;
-
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;
 import org.hibernate.dialect.function.StandardSQLFunction;
 import org.hibernate.dialect.function.VarArgsSQLFunction;
 import org.hibernate.type.StringType;
+
+/**
+ * Classe do dialeto do SQLite.
+ * 
+ * @author osmar
+ */
 
 public class SQLiteDialect extends Dialect {
     

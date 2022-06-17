@@ -3,6 +3,11 @@ package com;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Classe principal.
+ * 
+ * @author osmar
+ */
 @SpringBootApplication
 public class AplicacaoPrincipal {
 

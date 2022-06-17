@@ -1,5 +1,6 @@
 package com.entidade;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +10,7 @@ import javax.persistence.Id;
  * @author osmar
  */
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     private Integer clienteId;

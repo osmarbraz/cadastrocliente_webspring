@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Interface que define as operações para a persistência de cliente.
  *
+ * @author osmar
  */
 public interface ClienteServico {
 
