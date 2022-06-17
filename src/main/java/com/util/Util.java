@@ -13,10 +13,10 @@ import org.springframework.beans.BeanWrapperImpl;
  */
 public class Util {
 
-    private Util(){
-        
+    private Util() {
+
     }
-    
+
     /**
      * Copia os valores de um objeto de origem para um objeto de destino.
      *

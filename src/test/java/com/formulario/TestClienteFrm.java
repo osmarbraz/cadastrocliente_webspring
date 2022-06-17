@@ -12,6 +12,9 @@ class TestClienteFrm {
     @Test
     void testCliente() {
         ClienteFrm instancia = new ClienteFrm();
+        instancia.setClienteId(0);
+        instancia.setNome("");
+        instancia.setCpf("");
         assertTrue((instancia.getClienteId()==0) && "".equals(instancia.getNome()) && "".equals(instancia.getCpf()));
     }
 
@@ -19,6 +22,8 @@ class TestClienteFrm {
     void testClienteIdInt() {
         ClienteFrm instancia = new ClienteFrm();
         instancia.setClienteId(1);
+        instancia.setNome("");
+        instancia.setCpf("");
         assertTrue((instancia.getClienteId()==1) && "".equals(instancia.getNome()) && "".equals(instancia.getCpf()));
     }
     
@@ -32,6 +37,9 @@ class TestClienteFrm {
     @Test
     void testParaString() {
         ClienteFrm instancia = new ClienteFrm();
+        instancia.setClienteId(0);
+        instancia.setNome("");
+        instancia.setCpf("");
         String esperado = "clienteId:0 - Nome : - CPF :";
         assertEquals(esperado, instancia.toString());
     }   

@@ -15,43 +15,43 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TestClienteControle {
+class TestClienteControle {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testMenu() throws Exception {
+    void testMenu() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Menu")));
     }
     
     @Test
-    public void testFrmClienteIncluir() throws Exception {
+    void testFrmClienteIncluir() throws Exception {
         this.mockMvc.perform(get("/FrmClienteIncluir")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Incluir")));
     }
     
     @Test
-    public void testFrmClienteAlterar() throws Exception {
+    void testFrmClienteAlterar() throws Exception {
         this.mockMvc.perform(get("/FrmClienteAlterar")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Alterar")));
     }
     
     @Test
-    public void testFrmClienteExcluir() throws Exception {
+    void testFrmClienteExcluir() throws Exception {
         this.mockMvc.perform(get("/FrmClienteExcluir")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Excluir")));
     }
     
     @Test
-    public void testFrmClienteConsultar() throws Exception {
+    void testFrmClienteConsultar() throws Exception {
         this.mockMvc.perform(get("/FrmClienteConsultar")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Consultar")));
     }
     
     @Test
-    public void testFrmClienteListar() throws Exception {
+    void testFrmClienteListar() throws Exception {
         this.mockMvc.perform(get("/FrmClienteListar")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Listar")));
     }
