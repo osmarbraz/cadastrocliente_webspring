@@ -137,7 +137,7 @@ public class ClienteControle {
 
     @GetMapping("/FrmClienteListar")
     public String frmClienteListar(Model model) {
-        model.addAttribute(CLIENTE, clienteServico.getLista());
+        model.addAttribute("clientes", clienteServico.getLista());
         return "FrmClienteListar";
     }
 }

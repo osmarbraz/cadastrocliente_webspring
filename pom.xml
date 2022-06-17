@@ -13,8 +13,6 @@
     
     <groupId>com</groupId>
     <artifactId>cadastrocliente_webspring</artifactId>
-    <version>0.0.1</version>
-    <packaging>war</packaging>
 
     <name>cadastrocliente_webspring</name>
     <description>Exemplo CRUD Cliente Spring Boot</description>
