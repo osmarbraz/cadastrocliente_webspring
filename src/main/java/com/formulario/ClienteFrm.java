@@ -16,6 +16,27 @@ public class ClienteFrm {
     private String mensagem;
 
     /**
+     * Construtor sem argumentos da classe.
+     */
+    public ClienteFrm() {
+        this(0, "", "");
+    }
+
+    /**
+     * Construtor com argumentos da classe.
+     *
+     * @param clienteId
+     * @param nome
+     * @param cpf
+     */
+    public ClienteFrm(Integer clienteId, String nome, String cpf) {
+        setClienteId(clienteId);
+        setNome(nome);
+        setCpf(cpf);
+        setMensagem("");
+    }
+    
+    /**
      * @return the id
      */
     public Integer getClienteId() {
@@ -71,11 +92,8 @@ public class ClienteFrm {
         this.mensagem = mensagem;
     }
 
-    @Override
+     @Override
     public String toString() {
-        return "Cleinte{"
-                + "clienteId=" + clienteId
-                + ", nome'" + nome + '\''
-                + ", cpf='" + cpf + ')';
+      return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
     }
 }
