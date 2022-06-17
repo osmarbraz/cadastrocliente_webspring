@@ -10,13 +10,16 @@ import org.hibernate.type.StringType;
 
 public class SQLiteDialect extends Dialect {
     
-    private static final String SUBSTR = "substr"; 
+    private static final String SUBSTR_STR = "substr"; 
+    private static final String INTEGER_STR = "integer";
+    private static final String TEMPORARY_TABLE = "create temporary table if not exists";
+    private static final String SELECT_LAST_INSERT = "select last_insert_rowid()";
 
     public SQLiteDialect() {
-        registerColumnType(Types.BIT, "integer");
+        registerColumnType(Types.BIT, INTEGER_STR);
         registerColumnType(Types.TINYINT, "tinyint");
         registerColumnType(Types.SMALLINT, "smallint");
-        registerColumnType(Types.INTEGER, "integer");
+        registerColumnType(Types.INTEGER, INTEGER_STR);
         registerColumnType(Types.BIGINT, "bigint");
         registerColumnType(Types.FLOAT, "float");
         registerColumnType(Types.REAL, "real");
@@ -34,12 +37,12 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.LONGVARBINARY, "blob");        
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
-        registerColumnType(Types.BOOLEAN, "integer");
+        registerColumnType(Types.BOOLEAN, INTEGER_STR);
 
         registerFunction("concat", new VarArgsSQLFunction(StringType.INSTANCE, "", "||", ""));
         registerFunction("mod", new SQLFunctionTemplate(StringType.INSTANCE, "?1 % ?2"));
-        registerFunction(SUBSTR, new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
-        registerFunction("substring", new StandardSQLFunction(SUBSTR, StringType.INSTANCE));
+        registerFunction(SUBSTR_STR, new StandardSQLFunction(SUBSTR_STR, StringType.INSTANCE));
+        registerFunction("substring", new StandardSQLFunction(SUBSTR_STR, StringType.INSTANCE));
     }
 
     public boolean supportsIdentityColumns() {
@@ -51,32 +54,19 @@ public class SQLiteDialect extends Dialect {
     }
 
     public String getIdentityColumnString() {
-        return "integer";
+        return INTEGER_STR;
     }
 
     public String getIdentitySelectString() {
-        return "select last_insert_rowid()";
+        return SELECT_LAST_INSERT;
     }
-
-    @Override
-    public boolean supportsLimit() {
-        return true;
-    }
-
-    @Override
-    protected String getLimitString(String query, boolean hasOffset) {
-        return new StringBuffer(query.length() + 20).
-                append(query).
-                append(hasOffset ? " limit ? offset ?" : " limit ?").
-                toString();
-    }
-
+      
     public boolean supportsTemporaryTables() {
         return true;
     }
 
     public String getCreateTemporaryTableString() {
-        return "create temporary table if not exists";
+        return TEMPORARY_TABLE;
     }
 
     public boolean dropTemporaryTableAfterUse() {
