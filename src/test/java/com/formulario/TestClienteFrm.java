@@ -31,7 +31,7 @@ class TestClienteFrm {
     void testClienteMensage() {
         ClienteFrm instancia = new ClienteFrm();
         instancia.setMensagem("mensagem");
-        assertTrue("mensagem".equals(instancia.getMensagem()));
+        assertEquals("mensagem", instancia.getMensagem());
     }
 
     @Test

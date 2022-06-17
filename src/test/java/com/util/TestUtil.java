@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import com.entidade.Cliente;
 import static com.util.Util.nonNullCopyProperties;
 
-public class TestUtil {
+class TestUtil {
 
     @Test
     void testnonNullCopyProperties() {
