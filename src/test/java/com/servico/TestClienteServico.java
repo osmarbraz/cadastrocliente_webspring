@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import com.dao.ClienteDAO;
 import com.entidade.Cliente;
 import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -40,12 +41,22 @@ class TestClienteServico {
     }
     
     @Test
-    void testGetClienteId(){
+    void testGetClienteIdExiste(){
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
         doReturn(Optional.of(cliente)).when(DAO).findById(cliente.getClienteId());
 
         Cliente clienteRetorno = servico.getClientePeloId(cliente.getClienteId());
         
         assertSame(clienteRetorno, cliente);
+    }
+    
+    @Test
+    void testGetClienteIdNaoExiste(){
+        Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
+        doReturn(Optional.of(cliente)).when(DAO).findById(cliente.getClienteId());
+
+        Cliente clienteRetorno = servico.getClientePeloId(141);
+        
+        assertEquals(null, clienteRetorno);
     }
 }
