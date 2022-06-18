@@ -215,14 +215,11 @@
                             </password>
                         </auth>
                     </to>
-                    <container>
-                        <jvmFlags>
-                            <jvmFlag>-Xms256m</jvmFlag>
-                            <jvmFlag>-Xmx512m</jvmFlag>
-                        </jvmFlags>
+                    <container>                      
                         <ports>
                             <port>8080</port>
-                        </ports>                        
+                        </ports>     
+                        <format>OCI</format>                   
                     </container>
                 </configuration>
             </plugin>
