@@ -40,7 +40,7 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * @return the id
+     * @return o id
      */
     public Integer getClienteId() {
         return clienteId;

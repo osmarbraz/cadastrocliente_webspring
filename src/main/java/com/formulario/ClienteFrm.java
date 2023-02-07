@@ -14,7 +14,6 @@ public class ClienteFrm {
     private String cpf;
 
     private String mensagem;
-
     
     /**
      * @return the id
