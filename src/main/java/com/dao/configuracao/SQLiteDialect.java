@@ -20,6 +20,9 @@ public class SQLiteDialect extends Dialect {
     private static final String TEMPORARY_TABLE = "create temporary table if not exists";
     private static final String SELECT_LAST_INSERT = "select last_insert_rowid()";
 
+    /**
+     *  Construtor da classe do dialeto.
+     */
     public SQLiteDialect() {
         registerColumnType(Types.BIT, INTEGER_STR);
         registerColumnType(Types.TINYINT, "tinyint");

@@ -13,6 +13,9 @@ import org.springframework.beans.BeanWrapperImpl;
  */
 public class Util {
 
+    /**
+     * Construtor privado para impedir instãncias.
+     */
     private Util() {
 
     }

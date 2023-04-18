@@ -14,9 +14,7 @@ public class Cliente implements Serializable {
 
     @Id
     private Integer clienteId;
-
     private String nome;
-
     private String cpf;
 
     /**
@@ -83,6 +81,6 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-      return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
+        return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
     }
 }

@@ -24,11 +24,23 @@ public class ClienteServicoImplementacao implements ClienteServico {
         this.clienteDAO = clienteDAO;
     }
 
+    /**
+     * Serviço de inclusão de cliente.
+     * 
+     * @param cliente
+     * @return
+     */
     @Override
     public boolean inserir(Cliente cliente) {
         return clienteDAO.save(cliente) != null;
     }
 
+    /**
+     * Serviço de alteração de cliente.
+     * 
+     * @param cliente
+     * @return
+     */
     @Override
     public int alterar(Cliente cliente) {
         Integer id = cliente.getClienteId();        
@@ -43,6 +55,12 @@ public class ClienteServicoImplementacao implements ClienteServico {
         }
     }
 
+    /**
+     * Serviço de exclusão de cliente.
+     * 
+     * @param cliente
+     * @return
+     */
     @Override
     public int excluir(Cliente cliente) {
         int clienteId = cliente.getClienteId();
@@ -55,6 +73,12 @@ public class ClienteServicoImplementacao implements ClienteServico {
         }
     }
 
+    /**
+     * Serviço de consultar cliente pelo id.
+     * 
+     * @param clienteId
+     * @return
+     */
     @Override
     public Cliente getClientePeloId(Integer clienteId) {
         Optional<Cliente> cliente = clienteDAO.findById(clienteId);
@@ -65,11 +89,21 @@ public class ClienteServicoImplementacao implements ClienteServico {
         }
     }
 
+    /**
+     * Serviço de listar clientes.
+     * 
+     * @return
+     */
     @Override
     public List<Cliente> getLista() {
         return (List<Cliente>) clienteDAO.findAll();
     }
 
+    /**
+     * Serviço de contar clientes.
+     * 
+     * @return
+     */
     @Override
     public Long count() {
         return clienteDAO.count();

@@ -8,13 +8,10 @@ package com.formulario;
 public class ClienteFrm {
 
     private Integer clienteId;
-
     private String nome;
-
     private String cpf;
-
     private String mensagem;
-    
+
     /**
      * @return the id
      */
@@ -71,8 +68,8 @@ public class ClienteFrm {
         this.mensagem = mensagem;
     }
 
-     @Override
+    @Override
     public String toString() {
-      return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
+        return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
     }
 }
