@@ -16,17 +16,17 @@ Pipeline
 - prd - Empacotamento e distribuição.
 
 <br>
- - O projeto foi desenvolvido no NetBeans deve ser chamado cadastrocliente_webspring.<br>
- - Utiliza o Apache Maven para a automatização da construção.<br>
- - O projeto é um CRUD para os dados de cliente(clienteId, Nome, CPF).
- - As classes do projeto está organizado nos pacotes visão, controle, modelo, dao além de um pacote util.<br>
-    - Visão - Thymeleaf<br>
-    - Controle - Springboot<br>
-    - Modelo - JPA(Hipernate)<br>
- - Utiliza o Banco de Dados(SQLLite).<br>
- - Os dados de configuração (Servidor, Database, Usuario, Senha) da integração do java com o banco de dados estão no arquivo application.properties.<br>
- - A pasta test contêm os testes unitários do projeto utilizando JUnit 5.<br> 
- - Os testes são realizados no SO ubuntu-lastest e JDK 18.<br>
- - A cobertura do código é realizada através do JaCoCo e relatório enviado para o Sonarcloud.<br>
- - Distribuição para Docker Hub.
+- O projeto foi desenvolvido no NetBeans deve ser chamado cadastrocliente_webspring.<br>
+- Utiliza o Apache Maven para a automatização da construção.<br>
+- O projeto é um CRUD para os dados de cliente(clienteId, Nome, CPF).
+- As classes do projeto está organizado nos pacotes visão, controle, modelo, dao além de um pacote util.<br>
+   - Visão - Thymeleaf<br>
+   - Controle - Springboot<br>
+   - Modelo - JPA(Hipernate)<br>
+- Utiliza o Banco de Dados(SQLLite).<br>
+- Os dados de configuração (Servidor, Database, Usuario, Senha) da integração do java com o banco de dados estão no arquivo application.properties.<br>
+- A pasta test contêm os testes unitários do projeto utilizando JUnit 5.<br> 
+- Os testes são realizados no SO ubuntu-lastest e JDK 18.<br>
+- A cobertura do código é realizada através do JaCoCo e relatório enviado para o Sonarcloud.<br>
+- Distribuição para Docker Hub.
  
