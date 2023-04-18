@@ -62,11 +62,11 @@ public class ClienteServicoImplementacao implements ClienteServico {
      * @return
      */
     @Override
-    public int excluir(Cliente cliente) {
-        int clienteId = cliente.getClienteId();
+    public int excluir(Cliente cliente) {                
+        int clienteId = cliente.getClienteId();        
         //Se o cliente existe
-        if (clienteDAO.existsById(clienteId)) {
-            clienteDAO.deleteById(clienteId);
+        if (clienteDAO.existsById(clienteId)) {            
+            clienteDAO.deleteById(clienteId);            
             return 1;
         } else {
             return 0;

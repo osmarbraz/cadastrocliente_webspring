@@ -13,6 +13,28 @@ public class ClienteFrm {
     private String mensagem;
 
     /**
+     * Construtor sem parâmetros.
+     */
+    public ClienteFrm(){
+        this(0,"","","");
+    }
+    
+    /**
+     * Construtor do formulário de cliente.
+     * 
+     * @param clienteId
+     * @param nome
+     * @param cpf
+     * @param mensagem
+     */
+    public ClienteFrm(Integer clienteId, String nome, String cpf, String mensagem) {
+        this.clienteId = clienteId;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.mensagem = mensagem;
+    }    
+    
+    /**
      * @return the id
      */
     public Integer getClienteId() {
