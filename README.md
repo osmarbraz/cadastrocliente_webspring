@@ -19,7 +19,7 @@ Pipeline
 O projeto foi desenvolvido no NetBeans deve ser chamado cadastrocliente_webspring.<br>
 Utiliza o Apache Maven para a automatização da construção.<br>
 O projeto é um CRUD para os dados de cliente(clienteId, Nome, CPF).
-As classes do projeto está organizado nos pacotes visão, controle, modelo, dao além de um pacote util.<br>
+As classes do projeto está organizado nos pacotes visão, controle, modelo, dao além de um pacote util.
 - Visão - Thymeleaf
 - Controle - Springboot
 - Modelo - JPA(Hipernate)
