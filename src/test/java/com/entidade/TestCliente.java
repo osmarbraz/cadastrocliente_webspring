@@ -10,10 +10,20 @@ class TestCliente {
      * Testa o construtor sem argumentos do cliente.
      */
     @Test
-    void testCliente() {
+    void testClienteSemArgumento() {
         Cliente instancia = new Cliente();
         
         assertTrue((instancia.getClienteId() == 0) && "".equals(instancia.getNome()) && "".equals(instancia.getCpf()));
+    }
+    
+    /**
+     * Testa o construtor com argumentos do cliente.
+     */
+    @Test
+    void testClienteComArgumento() {
+        Cliente instancia = new Cliente(0,"A","1");
+        
+        assertTrue((instancia.getClienteId() == 0) && "A".equals(instancia.getNome()) && "1".equals(instancia.getCpf()));
     }
 
     /**
@@ -35,7 +45,7 @@ class TestCliente {
     @Test
     void testParaString() {
         Cliente instancia = new Cliente();
-        String esperado = "clienteId:0 - Nome : - CPF :";
+        String esperado = "clienteId:0 - Nome: - CPF:";
         
         assertEquals(esperado, instancia.toString());
     }

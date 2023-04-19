@@ -21,20 +21,7 @@ class TestClienteControle {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @MockBean
-    private ClienteServico servico;
-
-    /**
-     * Verifica se serviço foi carregado.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testCarregamentoServico() {
-        assertThat(servico).isNotNull();
-    }
-
+   
     /**
      * Testa o carregamento do menu.
      *

@@ -81,6 +81,6 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return ("clienteId:" + getClienteId() + " - Nome :" + getNome() + " - CPF :" + getCpf());
+        return ("clienteId:" + getClienteId() + " - Nome:" + getNome() + " - CPF:" + getCpf());
     }
 }
