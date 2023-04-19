@@ -1,5 +1,6 @@
 package com.dao.configuracao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
@@ -23,14 +24,14 @@ class TestSQLiteDialect {
     void testGetIdentityColumnString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("integer".equals(dialeto.getIdentityColumnString()));
+        assertEquals("integer", dialeto.getIdentityColumnString());
     }
 
     @Test
     void testGetIdentitySelectString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("select last_insert_rowid()".equals(dialeto.getIdentitySelectString()));
+        assertEquals("select last_insert_rowid()", dialeto.getIdentitySelectString());
     }
 
     @Test
@@ -44,7 +45,7 @@ class TestSQLiteDialect {
     void testGetCreateTemporaryTableString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("create temporary table if not exists".equals(dialeto.getCreateTemporaryTableString()));
+        assertEquals("create temporary table if not exists" ,dialeto.getCreateTemporaryTableString());
     }
 
     @Test
@@ -63,6 +64,7 @@ class TestSQLiteDialect {
     @Test
     void testIsCurrentTimestampSelectStringCallable() {
         SQLiteDialect dialeto = new SQLiteDialect();
+        
         assertFalse(dialeto.isCurrentTimestampSelectStringCallable());
     }
 
@@ -70,7 +72,7 @@ class TestSQLiteDialect {
     public void testGetCurrentTimestampSelectString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("select current_timestamp".equals(dialeto.getCurrentTimestampSelectString()));
+        assertEquals("select current_timestamp", dialeto.getCurrentTimestampSelectString());
     }
 
     @Test
@@ -81,7 +83,7 @@ class TestSQLiteDialect {
     }
 
     @Test
-    public void testHasAlterTable() {
+    void testHasAlterTable() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
         assertFalse(dialeto.hasAlterTable());
@@ -95,17 +97,17 @@ class TestSQLiteDialect {
     }
 
     @Test
-    public void testGetAddColumnString() {
+    void testGetAddColumnString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("add column".equals(dialeto.getAddColumnString()));
+        assertEquals("add column", dialeto.getAddColumnString());
     }
 
     @Test
     void testGetForUpdateString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
-        assertTrue("".equals(dialeto.getForUpdateString()));
+        assertEquals("", dialeto.getForUpdateString());
     }
 
     @Test
