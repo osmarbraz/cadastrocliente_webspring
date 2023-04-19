@@ -1,8 +1,8 @@
 package com.formulario;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 class TestClienteFrm {
 
@@ -11,7 +11,8 @@ class TestClienteFrm {
      */
     @Test
     void testFrmClienteSemArgumentos() {
-        ClienteFrm instancia = new ClienteFrm();        
+        ClienteFrm instancia = new ClienteFrm();      
+        
         assertTrue((instancia.getClienteId()==0) && "".equals(instancia.getNome()) && "".equals(instancia.getCpf()) && "".equals(instancia.getMensagem()));
     }
     
@@ -21,25 +22,24 @@ class TestClienteFrm {
     @Test
     void testFrmClienteComArgumento() {
         ClienteFrm instancia = new ClienteFrm(1,"A","B","C");        
+        
         assertTrue((instancia.getClienteId()==1) && "A".equals(instancia.getNome()) && "B".equals(instancia.getCpf()) && "C".equals(instancia.getMensagem()));
     }
 
+    /**
+     * Teste os sets do cliente.
+     */
     @Test
-    void testClienteIdInt() {
+    void testSetFrmCliente() {
         ClienteFrm instancia = new ClienteFrm();
         instancia.setClienteId(1);
-        instancia.setNome("");
-        instancia.setCpf("");
-        assertTrue((instancia.getClienteId()==1) && "".equals(instancia.getNome()) && "".equals(instancia.getCpf()));
+        instancia.setNome("A");
+        instancia.setCpf("B");
+        instancia.setMensagem("C");
+        
+        assertTrue((instancia.getClienteId()==1) && "A".equals(instancia.getNome()) && "B".equals(instancia.getCpf()) && "C".equals(instancia.getMensagem()));
     }
     
-    @Test
-    void testClienteMensage() {
-        ClienteFrm instancia = new ClienteFrm();
-        instancia.setMensagem("mensagem");
-        assertEquals("mensagem", instancia.getMensagem());
-    }
-
     @Test
     void testParaString() {
         ClienteFrm instancia = new ClienteFrm();
@@ -47,6 +47,7 @@ class TestClienteFrm {
         instancia.setNome("");
         instancia.setCpf("");
         String esperado = "clienteId:0 - Nome : - CPF :";
+        
         assertEquals(esperado, instancia.toString());
     }   
 }

@@ -20,19 +20,19 @@ import com.entidade.Cliente;
  */
 @Controller
 public class ClienteControle {
-    
-    private static final String CLIENTE = "cliente"; 
+
+    private static final String CLIENTE = "cliente";
 
     @Autowired
     private final ClienteServico clienteServico;
-    
-    public ClienteControle(ClienteServico clienteServico){
+
+    public ClienteControle(ClienteServico clienteServico) {
         this.clienteServico = clienteServico;
     }
 
     /**
      * Especifica a raiz("/") do projeto.
-     * 
+     *
      * @return Uma string com o caminho.
      */
     @GetMapping("/")
@@ -43,7 +43,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento da inclusão de cliente.
-     * 
+     *
      * @param clienteFrm Objeto do formulário.
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
@@ -72,13 +72,13 @@ public class ClienteControle {
 
     /**
      * Mapeamento da alteração de cliente.
-     * 
+     *
      * @param clienteFrm Objeto do formulário.
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */
     @PostMapping("/ClienteAlterar")
-    public String clienteAltear(@ModelAttribute ClienteFrm clienteFrm, Model model) {
+    public String clienteAlterar(@ModelAttribute ClienteFrm clienteFrm, Model model) {
         model.addAttribute(CLIENTE, clienteFrm);
         Valida valida = new Valida();
         boolean cpfValido = valida.validaCPF(clienteFrm.getCpf());
@@ -103,7 +103,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento da consulta de cliente.
-     * 
+     *
      * @param clienteFrm Objeto do formulário.
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
@@ -128,7 +128,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento da exclusão de cliente.
-     * 
+     *
      * @param clienteFrm Objeto do formulário.
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
@@ -151,7 +151,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento do caminho para o formulário de incluir cliente.
-     * 
+     *
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */
@@ -163,7 +163,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento do caminho para o formulário de alterar cliente.
-     * 
+     *
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */
@@ -175,6 +175,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento do caminho para o formulário de excluir cliente.
+     *
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */
@@ -186,7 +187,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento do caminho para o formulário de consultar cliente.
-     * 
+     *
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */
@@ -198,6 +199,7 @@ public class ClienteControle {
 
     /**
      * Mapeamento do caminho para o formulário de listar cliente.
+     *
      * @param model Modelo utilizado pelo formulário.
      * @return Uma string com o caminho.
      */

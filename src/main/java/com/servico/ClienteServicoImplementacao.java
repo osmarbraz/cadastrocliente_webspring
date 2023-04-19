@@ -19,14 +19,14 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     @Autowired
     private final ClienteDAO clienteDAO;
-    
-     public ClienteServicoImplementacao(ClienteDAO clienteDAO) {
+
+    public ClienteServicoImplementacao(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
     }
 
     /**
      * Serviço de inclusão de cliente.
-     * 
+     *
      * @param cliente
      * @return
      */
@@ -37,13 +37,13 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     /**
      * Serviço de alteração de cliente.
-     * 
+     *
      * @param cliente
      * @return
      */
     @Override
     public int alterar(Cliente cliente) {
-        Integer id = cliente.getClienteId();        
+        Integer id = cliente.getClienteId();
         Optional<Cliente> clienteAlterar = clienteDAO.findById(id);
         if (clienteAlterar.isPresent()) {
             Cliente oCliente = clienteAlterar.get();
@@ -57,16 +57,16 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     /**
      * Serviço de exclusão de cliente.
-     * 
+     *
      * @param cliente
      * @return
      */
     @Override
-    public int excluir(Cliente cliente) {                
-        int clienteId = cliente.getClienteId();        
+    public int excluir(Cliente cliente) {
+        int clienteId = cliente.getClienteId();
         //Se o cliente existe
-        if (clienteDAO.existsById(clienteId)) {            
-            clienteDAO.deleteById(clienteId);            
+        if (clienteDAO.existsById(clienteId)) {
+            clienteDAO.deleteById(clienteId);
             return 1;
         } else {
             return 0;
@@ -75,7 +75,7 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     /**
      * Serviço de consultar cliente pelo id.
-     * 
+     *
      * @param clienteId
      * @return
      */
@@ -91,7 +91,7 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     /**
      * Serviço de listar clientes.
-     * 
+     *
      * @return
      */
     @Override
@@ -101,7 +101,7 @@ public class ClienteServicoImplementacao implements ClienteServico {
 
     /**
      * Serviço de contar clientes.
-     * 
+     *
      * @return
      */
     @Override

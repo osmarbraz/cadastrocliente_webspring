@@ -9,19 +9,18 @@ import org.hibernate.type.StringType;
 
 /**
  * Classe do dialeto do SQLite.
- * 
+ *
  * @author osmar
  */
-
 public class SQLiteDialect extends Dialect {
-    
-    private static final String SUBSTR_STR = "substr"; 
+
+    private static final String SUBSTR_STR = "substr";
     private static final String INTEGER_STR = "integer";
     private static final String TEMPORARY_TABLE = "create temporary table if not exists";
     private static final String SELECT_LAST_INSERT = "select last_insert_rowid()";
 
     /**
-     *  Construtor da classe do dialeto.
+     * Construtor da classe do dialeto.
      */
     public SQLiteDialect() {
         registerColumnType(Types.BIT, INTEGER_STR);
@@ -42,7 +41,7 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.TIMESTAMP, "timestamp");
         registerColumnType(Types.BINARY, "blob");
         registerColumnType(Types.VARBINARY, "blob");
-        registerColumnType(Types.LONGVARBINARY, "blob");        
+        registerColumnType(Types.LONGVARBINARY, "blob");
         registerColumnType(Types.BLOB, "blob");
         registerColumnType(Types.CLOB, "clob");
         registerColumnType(Types.BOOLEAN, INTEGER_STR);
@@ -68,7 +67,7 @@ public class SQLiteDialect extends Dialect {
     public String getIdentitySelectString() {
         return SELECT_LAST_INSERT;
     }
-      
+
     public boolean supportsTemporaryTables() {
         return true;
     }

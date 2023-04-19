@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Classe principal.
- * 
+ *
  * @author osmar
  */
 @SpringBootApplication

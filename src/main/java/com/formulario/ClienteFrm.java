@@ -15,13 +15,13 @@ public class ClienteFrm {
     /**
      * Construtor sem parâmetros.
      */
-    public ClienteFrm(){
-        this(0,"","","");
+    public ClienteFrm() {
+        this(0, "", "", "");
     }
-    
+
     /**
      * Construtor do formulário de cliente.
-     * 
+     *
      * @param clienteId
      * @param nome
      * @param cpf
@@ -32,8 +32,8 @@ public class ClienteFrm {
         this.nome = nome;
         this.cpf = cpf;
         this.mensagem = mensagem;
-    }    
-    
+    }
+
     /**
      * @return the id
      */
