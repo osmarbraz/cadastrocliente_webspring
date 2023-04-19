@@ -69,7 +69,7 @@ class TestSQLiteDialect {
     }
 
     @Test
-    public void testGetCurrentTimestampSelectString() {
+    void testGetCurrentTimestampSelectString() {
         SQLiteDialect dialeto = new SQLiteDialect();
 
         assertEquals("select current_timestamp", dialeto.getCurrentTimestampSelectString());
