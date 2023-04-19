@@ -37,7 +37,7 @@ class TestClienteServico {
      * @throws Exception
      */
     @Test
-    public void testCarregamentoServico() {
+    void testCarregamentoServico() {
         assertThat(servico).isNotNull();
     }
 
@@ -47,7 +47,7 @@ class TestClienteServico {
      * @throws Exception
      */
     @Test
-    public void testCarregamentoDAO() {
+    void testCarregamentoDAO() {
         assertThat(DAO).isNotNull();
     }
 

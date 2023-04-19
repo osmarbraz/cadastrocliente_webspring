@@ -29,7 +29,7 @@ class TestClienteDAO {
      * @throws Exception
      */
     @Test
-    public void testCarregamentoDAO() {
+    void testCarregamentoDAO() {
         assertThat(DAO).isNotNull();
     }
 
