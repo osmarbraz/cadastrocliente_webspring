@@ -1,17 +1,21 @@
 package com.controle;
 
+import com.dao.ClienteDAO;
+import com.servico.ClienteServico;
+import com.formulario.ClienteFrm;
+import com.entidade.Cliente;
+import com.util.Valida;
+import static com.util.Util.nonNullCopyProperties;
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.util.Valida;
-import static com.util.Util.nonNullCopyProperties;
-import com.servico.ClienteServico;
-import com.formulario.ClienteFrm;
-import com.entidade.Cliente;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Classe de controle de cliente.
@@ -25,9 +29,19 @@ public class ClienteControle {
 
     @Autowired
     private final ClienteServico clienteServico;
+        
+    @Autowired
+    private final ClienteDAO clienteDAO;
 
-    public ClienteControle(ClienteServico clienteServico) {
+    /**
+     * Construtor para inicializar os atributos.
+     * 
+     * @param clienteServico
+     * @param clienteDAO 
+     */
+    public ClienteControle(ClienteServico clienteServico, ClienteDAO clienteDAO) {
         this.clienteServico = clienteServico;
+        this.clienteDAO = clienteDAO;
     }
 
     /**
@@ -207,5 +221,32 @@ public class ClienteControle {
     public String frmClienteListar(Model model) {
         model.addAttribute("clientes", clienteServico.getLista());
         return "FrmClienteListar";
+    }
+    
+    /**
+     * Mapeamento do caminho para retornar a lista de clientes.
+     *
+     * @return A lista de clientes em JSON.
+     */
+    @ResponseBody   //Usa a biblioteca Jackson para retornar o objeto em JSON
+    @GetMapping("/clientes")
+    public List<Cliente> getLista() {
+        //Recupera a lista de clientes
+        List clientes = (List<Cliente>) clienteDAO.findAll();
+        //Retorna a lista de clientes
+	return clientes;
+    }    
+    
+    /**
+     * Mapeamento do caminho para retornar um cliente.
+     *
+     * @param clienteId
+     * @return Um cliente em JSON.
+     */
+    @ResponseBody   //Usa a biblioteca Jackson para retornar o objeto em JSON
+    @GetMapping("/cliente/{clienteId}")
+    public Cliente getCliente(@PathVariable("clienteId") int clienteId) {       
+        //Recupera e retorna o cliente
+        return clienteDAO.findById(clienteId).get();        
     }
 }

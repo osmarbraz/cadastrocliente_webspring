@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.entidade.Cliente;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,23 +15,23 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
-import java.util.List;
+
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 class TestClienteDAO {
 
     @Autowired
-    ClienteDAO DAO;
+    ClienteDAO dao;
 
     /**
-     * Verifica se DAO foi carregado.
+     * Verifica se dao foi carregado.
      *
      * @throws Exception
      */
     @Test
     void testCarregamentoDAO() {
-        assertThat(DAO).isNotNull();
+        assertThat(dao).isNotNull();
     }
 
     /**
@@ -41,7 +42,7 @@ class TestClienteDAO {
     void testInsercao() {
         //Instancia um cliente para testes
         Cliente cliente = new Cliente(131, "Cliente Existente", "11111111111");
-        Cliente clienteSalvo = DAO.save(cliente);
+        Cliente clienteSalvo = dao.save(cliente);
         
         assertNotNull(clienteSalvo);
     }
@@ -55,9 +56,9 @@ class TestClienteDAO {
         //Instancia um cliente para testes
         Cliente cliente = new Cliente(131, "Cliente Existente", "11111111111");
         // Insere os dados da consulta
-        DAO.save(cliente);
+        dao.save(cliente);
         //Consulta
-        List<Cliente> lista = (List<Cliente>) DAO.findAll();
+        List<Cliente> lista = (List<Cliente>) dao.findAll();
         
         assertNotEquals(0, lista.size());
     }
@@ -69,13 +70,13 @@ class TestClienteDAO {
     @Rollback(true)
     void testAlteracaoNome() {
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        DAO.save(cliente);
+        dao.save(cliente);
 
         String nomeAlteracao = "Alterado";
 
-        Cliente oCliente = DAO.findById(cliente.getClienteId()).get();
+        Cliente oCliente = dao.findById(cliente.getClienteId()).get();
         oCliente.setNome(nomeAlteracao);
-        DAO.save(oCliente);
+        dao.save(oCliente);
 
         assertEquals(nomeAlteracao, oCliente.getNome());
     }
@@ -87,13 +88,13 @@ class TestClienteDAO {
     @Rollback(true)
     void testAlteracaoCpf() {
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        DAO.save(cliente);
+        dao.save(cliente);
 
         String cpfAlteracao = "22222222222";
 
-        Cliente oCliente = DAO.findById(cliente.getClienteId()).get();
+        Cliente oCliente = dao.findById(cliente.getClienteId()).get();
         oCliente.setCpf(cpfAlteracao);
-        DAO.save(oCliente);
+        dao.save(oCliente);
 
         assertEquals(cpfAlteracao, oCliente.getCpf());
     }
@@ -106,19 +107,19 @@ class TestClienteDAO {
     void testExclusao() {
         //Inclui um cliente para realizar o testes
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        DAO.save(cliente);
+        dao.save(cliente);
 
         //Id do cliente a ser excluído
         Integer clienteId = 131;
 
         //Verifica se existe antes da exclusão
-        boolean existeAntesExclusao = DAO.findById(clienteId).isPresent();
+        boolean existeAntesExclusao = dao.findById(clienteId).isPresent();
 
         //Exclui o cliente        
-        DAO.deleteById(clienteId);
+        dao.deleteById(clienteId);
 
         //Verifica se existe depols da exclusão
-        boolean naoExisteDepoisExclusao = DAO.findById(clienteId).isPresent();
+        boolean naoExisteDepoisExclusao = dao.findById(clienteId).isPresent();
 
         assertTrue(existeAntesExclusao);
         assertFalse(naoExisteDepoisExclusao);
@@ -132,9 +133,9 @@ class TestClienteDAO {
     void testLista() {
         //Inclui um cliente para realizar o testes
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        DAO.save(cliente);
+        dao.save(cliente);
 
-        List clientes = (List<Cliente>) DAO.findAll();
+        List clientes = (List<Cliente>) dao.findAll();
 
         assertThat(clientes).size().isPositive();
     }

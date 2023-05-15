@@ -1,15 +1,14 @@
 package com.controle;
 
-import com.servico.ClienteServico;
+import com.dao.ClienteDAO;
+import com.entidade.Cliente;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-
 import static org.hamcrest.Matchers.containsString;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -22,6 +21,19 @@ class TestClienteControle {
     @Autowired
     private MockMvc mockMvc;
    
+    @Autowired
+    ClienteDAO dao;
+    
+     /**
+     * Verifica se dao foi carregado.
+     *
+     * @throws Exception
+     */
+    @Test
+    void testCarregamentoDAO() {
+        assertThat(dao).isNotNull();
+    }
+    
     /**
      * Testa o carregamento do menu.
      *
@@ -87,5 +99,50 @@ class TestClienteControle {
     void testFrmClienteListar() throws Exception {
         this.mockMvc.perform(get("/FrmClienteListar")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("Listar")));
+    }
+    
+    
+    /**
+     * Testa o serviço getCliente,
+     *
+     * @throws Exception
+     */
+    @Test
+    void testGetCliente() throws Exception {
+        
+        //Inclui um cliente para realizar o testes
+        Cliente cliente = new Cliente(131, "TesteGetCliente", "11111111111");
+        dao.save(cliente);
+
+        //Id do cliente a ser excluído
+        Integer clienteId = 131;
+
+        this.mockMvc.perform(get("/cliente/131")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("{\"clienteId\":131,\"nome\":\"TesteGetCliente\",\"cpf\":\"11111111111\"}")));
+                
+        //Exclui o cliente        
+        dao.deleteById(clienteId);
+    }
+    
+    /**
+     * Testa o serviço getLista,
+     *
+     * @throws Exception
+     */
+    @Test
+    void testGetLista() throws Exception {
+        
+        //Inclui um cliente para realizar o testes
+        Cliente cliente = new Cliente(131, "TesteGetLista", "11111111111");
+        dao.save(cliente);
+
+        //Id do cliente a ser excluído
+        Integer clienteId = 131;
+
+        this.mockMvc.perform(get("/clientes")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("{\"clienteId\":131,\"nome\":\"TesteGetLista\",\"cpf\":\"11111111111\"}")));
+                
+        //Exclui o cliente        
+        dao.deleteById(clienteId);
     }
 }
