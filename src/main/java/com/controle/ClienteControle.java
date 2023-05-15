@@ -8,6 +8,7 @@ import com.util.Valida;
 import static com.util.Util.nonNullCopyProperties;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
@@ -247,6 +248,11 @@ public class ClienteControle {
     @GetMapping("/cliente/{clienteId}")
     public Cliente getCliente(@PathVariable("clienteId") int clienteId) {       
         //Recupera e retorna o cliente
-        return clienteDAO.findById(clienteId).get();        
+        Optional<Cliente> cliente = clienteDAO.findById(clienteId);
+        if (cliente.isPresent()) {
+            return cliente.get();
+        } else {
+            return null;
+        }        
     }
 }
