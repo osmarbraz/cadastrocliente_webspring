@@ -2,6 +2,8 @@ package com.controle;
 
 import com.dao.ClienteDAO;
 import com.entidade.Cliente;
+
+import javax.ws.rs.core.MediaType;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,9 @@ class TestClienteControle {
     @Test
     void testMenu() throws Exception {
         // Verifica sem na requisão "/" existe a string "Menu".
-        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Menu")));
     }
 
@@ -53,7 +57,9 @@ class TestClienteControle {
      */
     @Test
     void testFrmClienteIncluir() throws Exception {
-        this.mockMvc.perform(get("/FrmClienteIncluir")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/FrmClienteIncluir"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Incluir")));
     }
 
@@ -64,7 +70,9 @@ class TestClienteControle {
      */
     @Test
     void testFrmClienteAlterar() throws Exception {
-        this.mockMvc.perform(get("/FrmClienteAlterar")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/FrmClienteAlterar"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Alterar")));
     }
 
@@ -75,7 +83,9 @@ class TestClienteControle {
      */
     @Test
     void testFrmClienteExcluir() throws Exception {
-        this.mockMvc.perform(get("/FrmClienteExcluir")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/FrmClienteExcluir"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Excluir")));
     }
 
@@ -86,7 +96,9 @@ class TestClienteControle {
      */
     @Test
     void testFrmClienteConsultar() throws Exception {
-        this.mockMvc.perform(get("/FrmClienteConsultar")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/FrmClienteConsultar"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Consultar")));
     }
 
@@ -97,7 +109,9 @@ class TestClienteControle {
      */
     @Test
     void testFrmClienteListar() throws Exception {
-        this.mockMvc.perform(get("/FrmClienteListar")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/FrmClienteListar"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Listar")));
     }
     
@@ -117,7 +131,10 @@ class TestClienteControle {
         //Id do cliente a ser excluído
         Integer clienteId = 131;
 
-        this.mockMvc.perform(get("/cliente/131")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/cliente/131"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200   
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) //Retorna um JSON 
                 .andExpect(content().string(containsString("{\"clienteId\":131,\"nome\":\"TesteGetCliente\",\"cpf\":\"11111111111\"}")));
                 
         //Exclui o cliente        
@@ -139,7 +156,13 @@ class TestClienteControle {
         //Id do cliente a ser excluído
         Integer clienteId = 131;
 
-        this.mockMvc.perform(get("/clientes")).andDo(print()).andExpect(status().isOk())
+//        this.mockMvc.perform(get("/clientes")).andDo(print()).andExpect(status().isOk())
+//                .andExpect(content().string(containsString("{\"clienteId\":131,\"nome\":\"TesteGetLista\",\"cpf\":\"11111111111\"}")));
+
+        this.mockMvc.perform(get("/clientes"))
+                .andDo(print())
+                .andExpect(status().isOk()) //API retorna o código 200                
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) //Retorna um JSON                
                 .andExpect(content().string(containsString("{\"clienteId\":131,\"nome\":\"TesteGetLista\",\"cpf\":\"11111111111\"}")));
                 
         //Exclui o cliente        

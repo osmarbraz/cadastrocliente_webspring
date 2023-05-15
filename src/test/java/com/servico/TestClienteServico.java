@@ -29,7 +29,7 @@ class TestClienteServico {
      * Crie uma implementação simulada do DAO
      */
     @MockBean
-    private ClienteDAO DAO;
+    private ClienteDAO dao;
 
     /**
      * Verifica se serviço foi carregado.
@@ -48,7 +48,7 @@ class TestClienteServico {
      */
     @Test
     void testCarregamentoDAO() {
-        assertThat(DAO).isNotNull();
+        assertThat(dao).isNotNull();
     }
 
     /**
@@ -57,11 +57,12 @@ class TestClienteServico {
     @Test
     void testInserir() {
         //Instancia um cliente para testes
-        Cliente cliente = new Cliente(131, "Cliente Existente", "11111111111");
-        doReturn(cliente).when(DAO).save(any());
-
-        assertTrue(servico.inserir(cliente));
+        Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
+        doReturn(clienteInserir).when(dao).save(any());
+        //Avalia o retorno
+        assertTrue(servico.inserir(clienteInserir));
     }
+       
 
     /**
      * Testa a alteração de um cliente existente através do serviço.
@@ -70,15 +71,15 @@ class TestClienteServico {
     void testAlterarClienteExistente() {
         //Instancia um cliente para alteração
         Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
-        doReturn(clienteInserir).when(DAO).save(any());
+        doReturn(clienteInserir).when(dao).save(any());
         //Insere o cliente a ser alterado
         servico.inserir(clienteInserir);
 
         //Recupera o cliente a ser alterado
         int retornoAlteracao = -1;
-        doReturn(Optional.of(clienteInserir)).when(DAO).findById(clienteInserir.getClienteId());
+        doReturn(Optional.of(clienteInserir)).when(dao).findById(clienteInserir.getClienteId());
         Integer id = clienteInserir.getClienteId();
-        Optional<Cliente> clienteAlterar = DAO.findById(id);
+        Optional<Cliente> clienteAlterar = dao.findById(id);
         //Verifica se o cliente foi incluído
         if (clienteAlterar.isPresent()) {
             //Recupera o objeto
@@ -88,11 +89,11 @@ class TestClienteServico {
             //Copia os dados do cliente a ser alterado para o cliente existente
             nonNullCopyProperties(aCliente, oCliente);
             //Salva a alteração
-            DAO.save(oCliente);
+            dao.save(oCliente);
             //Retorno da alteração
             retornoAlteracao = servico.alterar(clienteInserir);
         }
-
+        //Avalia o retorno
         assertSame(1, retornoAlteracao);
     }
     
@@ -103,16 +104,16 @@ class TestClienteServico {
     void testAlterarClienteInexistente() {
         //Instancia um cliente para alteração
         Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
-        doReturn(clienteInserir).when(DAO).save(any());
+        doReturn(clienteInserir).when(dao).save(any());
         //Insere o cliente a ser alterado
         servico.inserir(clienteInserir);
 
         //Recupera o cliente a ser alterado
         int retornoAlteracao = -1;
         //Especifica um cliente inexistente
-        doReturn(Optional.of(clienteInserir)).when(DAO).findById(999);
+        doReturn(Optional.of(clienteInserir)).when(dao).findById(999);
         Integer id = 999;
-        Optional<Cliente> clienteAlterar = DAO.findById(id);
+        Optional<Cliente> clienteAlterar = dao.findById(id);
         //Verifica se o cliente foi incluído
         if (clienteAlterar.isPresent()) {
             //Recupera o objeto
@@ -122,11 +123,11 @@ class TestClienteServico {
             //Copia os dados do cliente a ser alterado para o cliente existente
             nonNullCopyProperties(aCliente, oCliente);
             //Salva a alteração
-            DAO.save(oCliente);
+            dao.save(oCliente);
             //Retorno da alteração
             retornoAlteracao = servico.alterar(clienteInserir);
         }
-
+        //Avalia o retorno
         assertSame(-1, retornoAlteracao);
     }
 
@@ -136,10 +137,10 @@ class TestClienteServico {
     @Test
     void testGetClienteIdExiste() {
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        doReturn(Optional.of(cliente)).when(DAO).findById(cliente.getClienteId());
+        doReturn(Optional.of(cliente)).when(dao).findById(cliente.getClienteId());
 
         Cliente clienteRetorno = servico.getClientePeloId(cliente.getClienteId());
-
+        //Avalia o retorno
         assertSame(clienteRetorno, cliente);
     }
 
@@ -149,10 +150,10 @@ class TestClienteServico {
     @Test
     void testGetClienteIdNaoExiste() {
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        doReturn(Optional.of(cliente)).when(DAO).findById(cliente.getClienteId());
+        doReturn(Optional.of(cliente)).when(dao).findById(cliente.getClienteId());
 
         Cliente clienteRetorno = servico.getClientePeloId(141);
-
+        //Avalia o retorno
         assertEquals(null, clienteRetorno);
     }
 }
