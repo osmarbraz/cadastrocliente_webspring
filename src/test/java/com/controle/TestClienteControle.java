@@ -23,11 +23,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.mockito.MockitoAnnotations;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import org.mockito.InjectMocks;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -47,22 +48,47 @@ class TestClienteControle {
     @Mock
     private Model model;
 
+    @InjectMocks
     private ClienteControle controle;
     
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        controle = new ClienteControle(servico, dao);
-    }
-    
      /**
-     * Verifica se dao foi carregado.
+     * Verifica se o dao foi carregado.
      *
      * @throws Exception
      */
     @Test
     void testCarregamentoDAO() {
         assertThat(dao).isNotNull();
+    }
+        
+    /**
+     * Verifica se o serviço foi carregado.
+     *
+     * @throws Exception
+     */
+    @Test
+    void testCarregamentoServico() {
+        assertThat(servico).isNotNull();
+    }
+    
+     /**
+     * Verifica se o model foi carregado.
+     *
+     * @throws Exception
+     */
+    @Test
+    void testCarregamentoModel() {
+        assertThat(model).isNotNull();
+    }
+    
+    /**
+     * Verifica se o controle foi carregado.
+     *
+     * @throws Exception
+     */
+    @Test
+    void testCarregamentoControle() {
+        assertThat(controle).isNotNull();
     }
     
     /**
@@ -72,7 +98,7 @@ class TestClienteControle {
      */
     @Test
     void testMenu() throws Exception {
-        // Verifica sem na requisão "/" existe a string "Menu".
+        //Verifica sem na requisão "/" existe a string "Menu".
         this.mockMvc.perform(get("/"))
                 .andDo(print())
                 .andExpect(status().isOk()) //API retorna o código 200   
@@ -93,6 +119,82 @@ class TestClienteControle {
     }
    
     /**
+     * Testa a inclusão de cliente com CPF válido.
+     *
+     */
+    @Test
+    public void testClienteIncluirCPFValido() {       
+        //Cliente a ser incluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de inserção de algum cliente com sucesso(true) no serviço
+        when(servico.inserir(any(Cliente.class))).thenReturn(true);
+        
+        //Retorno do controle
+        String resultado = controle.clienteIncluir(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteIncluir", resultado);
+        assertEquals("Inclusão realizada com sucesso.", clienteFrm.getMensagem());
+        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+    }
+    
+     /**
+     * Testa a inclusão de cliente com CPF válido mas com falha.
+     *
+     */
+    @Test
+    public void testClienteIncluirCPFValidoFala() {
+        //Cliente a ser incluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setMensagem(null);       
+        
+        //Simula o cenário de inserção de algum cliente com falha(false) no serviço
+        when(servico.inserir(any(Cliente.class))).thenReturn(false);
+
+        //Retorno do controle
+        String resultado = controle.clienteIncluir(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteIncluir", resultado);
+        assertEquals("Inclusão não realizada.", clienteFrm.getMensagem());
+        verify(model).addAttribute("cliente", clienteFrm);
+    }
+    
+    /**
+     * Testa a inclusão de cliente com CPF inválido.
+     *
+     */
+    @Test
+    public void testClienteIncluirCPFInvalido() {
+        //Cliente a ser incluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("12345678900"); // CPF inválido
+        clienteFrm.setMensagem(null);
+        
+        //Simula o cenário de inserção de algum cliente com sucesso(true) no serviço
+        when(servico.inserir(any(Cliente.class))).thenReturn(true);
+        
+        //Retorno do controle
+        String retorno = controle.clienteIncluir(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteIncluir", retorno);
+        assertEquals("CPF Inválido!", clienteFrm.getMensagem());
+        //Verifica se o método nunca foi chamado
+        verify(servico, never()).inserir(any(Cliente.class));
+        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+    }
+    
+    /**
      * Testa o carregamento do formulário de alterar cliente.
      *
      * @throws Exception
@@ -103,6 +205,80 @@ class TestClienteControle {
                 .andDo(print())
                 .andExpect(status().isOk()) //API retorna o código 200   
                 .andExpect(content().string(containsString("Alterar")));
+    }
+    
+    /**
+     * Testa a alteração de cliente com CPF válido.
+     *
+     */
+    @Test
+    public void testClienteAlterarCPFValido() {        
+        //Cliente a ser incluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de alteração de algum cliente com sucesso(1) no serviço
+        when(servico.alterar(any(Cliente.class))).thenReturn(1);
+
+        //Retorno do controle
+        String retorno = controle.clienteAlterar(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteAlterar", retorno);
+        assertEquals("Alteração realizada com sucesso.", clienteFrm.getMensagem());
+        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+    }
+    
+     /**
+     * Testa a alteração de cliente com CPF válido e inexistente.
+     *
+     */
+    @Test
+    public void testClienteAlterarCPFValidoInexistente() {
+        //Cliente a ser alterado
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de alteração de algum cliente com falha(0) no serviço
+        when(servico.excluir(any(Cliente.class))).thenReturn(0);
+
+        //Retorno do controle
+        String resultado = controle.clienteAlterar(clienteFrm, model);
+
+        //Retorno do controle
+        assertEquals("ClienteAlterar", resultado);
+        assertEquals("Alteração não realizada.", clienteFrm.getMensagem()); 
+        verify(model).addAttribute("cliente", clienteFrm);
+    }
+    
+    
+     /**
+     * Testa a alteração de cliente com CPF inválido.
+     *
+     */
+    @Test
+    public void testClienteAlterarCPFInvalido() {
+        //Cliente a ser incluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("12345678900"); // CPF inválido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de alteração de algum cliente com sucesso(1) no serviço
+        when(servico.excluir(any(Cliente.class))).thenReturn(1);
+
+        //Retorno do controle
+        String result = controle.clienteAlterar(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteAlterar", result);
+        assertEquals("CPF Inválido!", clienteFrm.getMensagem());        
+        verify(servico, never()).alterar(any(Cliente.class));
+        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
     }
     
     /**
@@ -118,6 +294,54 @@ class TestClienteControle {
                 .andExpect(content().string(containsString("Excluir")));
     }
    
+    /**
+     * Testa a exclusão de cliente existente.
+     *
+     */
+    @Test
+    public void testClienteExcluirExistente() {
+         //Cliente a ser excluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("12345678900"); // CPF inválido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de exclusão de algum cliente com sucesso(1) no serviço
+        when(servico.excluir(any(Cliente.class))).thenReturn(1);
+
+        //Retorno do controle
+        String result = controle.clienteExcluir(clienteFrm, model);
+
+        //Avalia os retornos
+        assertEquals("ClienteExcluir", result);
+        assertEquals("Exclusão realizada com sucesso.", clienteFrm.getMensagem());        
+        verify(servico, never()).alterar(any(Cliente.class));        
+    }
+    
+    /**
+     * Testa a exclusão de cliente inexistente.
+     *
+     */
+    @Test
+    public void testClienteExcluirInexistente() {
+        //Cliente a ser excluído
+        ClienteFrm clienteFrm = new ClienteFrm();
+        clienteFrm.setClienteId(131);
+        clienteFrm.setNome("Cliente 131");        
+        clienteFrm.setCpf("12345678900"); // CPF inválido
+        clienteFrm.setMensagem(null);
+        //Simula o cenário de exclusão de algum cliente com falha(0) no serviço
+        when(servico.excluir(any(Cliente.class))).thenReturn(0);
+
+        //Retorno do controle
+        String resultado = controle.clienteExcluir(clienteFrm, model);
+
+        //Retorno do controle
+        assertEquals("ClienteExcluir", resultado);
+        assertEquals("Exclusão não realizada.", clienteFrm.getMensagem()); 
+        verify(model).addAttribute("cliente", clienteFrm);
+    }
+    
     /**
      * Testa o carregamento do formulário de consulta de cliente.
      *
@@ -138,6 +362,7 @@ class TestClienteControle {
      */
     @Test
     void testClienteConsultarExistente() {
+        //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
@@ -165,6 +390,7 @@ class TestClienteControle {
      */
     @Test
     void testClienteConsultarInexistente() {
+        //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
@@ -182,7 +408,7 @@ class TestClienteControle {
         assertEquals("ClienteConsultar", resultado);
         assertEquals("Cliente não encontrado.", clienteFrm.getMensagem());
         
-        //Se o método não foi chamado
+        //Se o método nunca foi chamado
         verify(servico, never()).getClientePeloId(132);
     }
     
@@ -205,9 +431,8 @@ class TestClienteControle {
      * @throws Exception
      */
     @Test
-    void testGetClienteExistente() throws Exception {
-        
-        //Inclui um cliente para realizar o testes
+    void testGetClienteExistente() throws Exception {        
+        //Cliente a ser incluído
         Cliente cliente = new Cliente(132, "Cliente 132", "11111111111");
         dao.save(cliente);
 
@@ -230,8 +455,7 @@ class TestClienteControle {
      * @throws Exception
      */
     @Test
-    void testGetClienteInexistente() throws Exception {
-        
+    void testGetClienteInexistente() throws Exception {        
         //Id do cliente inexistente
         Integer clienteId = 133;
 
@@ -247,9 +471,8 @@ class TestClienteControle {
      * @throws Exception
      */
     @Test
-    void testGetLista() throws Exception {
-        
-        //Inclui um cliente para realizar o testes
+    void testGetLista() throws Exception {        
+        //Cliente a ser incluído
         Cliente cliente = new Cliente(131, "TesteGetLista", "11111111111");
         dao.save(cliente);
 

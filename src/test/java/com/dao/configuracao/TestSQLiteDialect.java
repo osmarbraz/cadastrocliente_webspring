@@ -2,6 +2,7 @@ package com.dao.configuracao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -117,6 +118,27 @@ class TestSQLiteDialect {
         assertFalse(dialeto.supportsOuterJoinForUpdate());
     }
 
+    @Test
+    public void testGetDropForeignKeyString() {
+        SQLiteDialect dialect = new SQLiteDialect();
+        
+        assertThrows(UnsupportedOperationException.class, dialect::getDropForeignKeyString);
+    }
+
+    @Test
+    public void testGetAddForeignKeyConstraintString() {
+        SQLiteDialect dialect = new SQLiteDialect();
+        
+        assertThrows(UnsupportedOperationException.class, () -> dialect.getAddForeignKeyConstraintString("constraintName", new String[]{"foreignKey"}, "referencedTable", new String[]{"primaryKey"}, true));
+    }
+
+    @Test
+    public void testGetAddPrimaryKeyConstraintString() {
+        SQLiteDialect dialect = new SQLiteDialect();
+        
+        assertThrows(UnsupportedOperationException.class, () -> dialect.getAddPrimaryKeyConstraintString("constraintName"));
+    }
+    
     @Test
     void testSupportsIfExistsBeforeTableName() {
         SQLiteDialect dialeto = new SQLiteDialect();
