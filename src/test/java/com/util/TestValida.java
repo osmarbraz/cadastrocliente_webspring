@@ -60,6 +60,17 @@ class TestValida {
     }
     
     /**
+     * Teste CPF inválido nulo.
+     * 
+     */
+    void testCPFNulo() {
+                  
+        boolean retorno = valida.validaCPF(null);
+        
+        assertFalse(retorno);
+    }
+    
+    /**
      * Finaliza a classe de validação.
      */
     @AfterAll
