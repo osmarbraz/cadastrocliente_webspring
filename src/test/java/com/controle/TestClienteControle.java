@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.InjectMocks;
 
 @SpringBootTest
@@ -139,7 +138,7 @@ class TestClienteControle {
         //Avalia os retornos
         assertEquals("ClienteIncluir", resultado);
         assertEquals("Inclusão realizada com sucesso.", clienteFrm.getMensagem());
-        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+        verify(model).addAttribute("cliente", clienteFrm);
     }
     
      /**
@@ -191,7 +190,7 @@ class TestClienteControle {
         assertEquals("CPF Inválido!", clienteFrm.getMensagem());
         //Verifica se o método nunca foi chamado
         verify(servico, never()).inserir(any(Cliente.class));
-        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+        verify(model).addAttribute("cliente", clienteFrm);
     }
     
     /**
@@ -228,7 +227,7 @@ class TestClienteControle {
         //Avalia os retornos
         assertEquals("ClienteAlterar", retorno);
         assertEquals("Alteração realizada com sucesso.", clienteFrm.getMensagem());
-        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+        verify(model).addAttribute("cliente", clienteFrm);
     }
     
      /**
@@ -278,7 +277,7 @@ class TestClienteControle {
         assertEquals("ClienteAlterar", result);
         assertEquals("CPF Inválido!", clienteFrm.getMensagem());        
         verify(servico, never()).alterar(any(Cliente.class));
-        verify(model).addAttribute(eq("cliente"), eq(clienteFrm));
+        verify(model).addAttribute("cliente", clienteFrm);
     }
     
     /**
