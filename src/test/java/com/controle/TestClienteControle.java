@@ -147,7 +147,7 @@ class TestClienteControle {
      *
      */
     @Test
-    void testClienteIncluirCPFValidoFala() {
+    void testClienteIncluirCPFValidoFalha() {
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
