@@ -123,7 +123,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteIncluirCPFValido() {       
+    void testClienteIncluirCPFValido() {       
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -147,7 +147,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteIncluirCPFValidoFala() {
+    void testClienteIncluirCPFValidoFala() {
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -172,7 +172,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteIncluirCPFInvalido() {
+    void testClienteIncluirCPFInvalido() {
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -212,7 +212,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteAlterarCPFValido() {        
+    void testClienteAlterarCPFValido() {        
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -236,7 +236,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteAlterarCPFValidoInexistente() {
+    void testClienteAlterarCPFValidoInexistente() {
         //Cliente a ser alterado
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -261,7 +261,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteAlterarCPFInvalido() {
+    void testClienteAlterarCPFInvalido() {
         //Cliente a ser incluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -299,7 +299,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteExcluirExistente() {
+    void testClienteExcluirExistente() {
          //Cliente a ser excluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
@@ -323,7 +323,7 @@ class TestClienteControle {
      *
      */
     @Test
-    public void testClienteExcluirInexistente() {
+    void testClienteExcluirInexistente() {
         //Cliente a ser excluído
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);

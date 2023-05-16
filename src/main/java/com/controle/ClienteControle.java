@@ -232,7 +232,7 @@ public class ClienteControle {
     @GetMapping("/clientes")
     public List<Cliente> getLista() {
         //Recupera a lista de clientes
-        List clientes = (List<Cliente>) clienteDAO.findAll();
+        List clientes = (List<Cliente>)clienteDAO.findAll();
         //Retorna a lista de clientes
 	return clientes;
     }    
