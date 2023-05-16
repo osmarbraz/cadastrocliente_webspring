@@ -26,7 +26,7 @@ public class Util {
      * @param origem Objeto de origem.
      * @param destino Objeto de destino.
      */
-    public static void nonNullCopyProperties(Object origem, Object destino) {
+    public static void nonNullCopyProperties(Object origem, Object destino) {        
         BeanUtils.copyProperties(origem, destino, getNullPropertyNames(origem));
     }
 

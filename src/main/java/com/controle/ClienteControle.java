@@ -71,9 +71,9 @@ public class ClienteControle {
         if (cpfValido) {
             //Instância um cliente para receber os dados do formulário
             Cliente cliente = new Cliente();
-            //Copia os dados do formulário para a entidade
+            //Copia os dados do formulário para a entidade            
             nonNullCopyProperties(clienteFrm, cliente);
-            if (clienteServico.inserir(cliente)) {
+            if (clienteServico.inserir(cliente)) {                
                 clienteFrm.setMensagem("Inclusão realizada com sucesso.");
             } else {
                 clienteFrm.setMensagem("Inclusão não realizada.");
@@ -102,7 +102,6 @@ public class ClienteControle {
             Cliente cliente = new Cliente();
             //Copia os dados do formulário para a entidade
             nonNullCopyProperties(clienteFrm, cliente);
-
             int resultado = clienteServico.alterar(cliente);
             if (resultado != 0) {
                 clienteFrm.setMensagem("Alteração realizada com sucesso.");

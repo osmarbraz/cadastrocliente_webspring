@@ -5,6 +5,8 @@ import com.entidade.Cliente;
 
 import org.junit.jupiter.api.Test;
 import static com.util.Util.nonNullCopyProperties;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,15 +26,16 @@ class TestClienteServico {
     /**
      * Autowire no serviço que queremos testar
      */
-    @Autowired
+    @Autowired    
     private ClienteServico servico;
+    
 
     /**
      * Crie uma implementação simulada do DAO
      */
     @MockBean
     private ClienteDAO dao;
-
+    
     /**
      * Verifica se serviço foi carregado.
      *
@@ -50,7 +55,7 @@ class TestClienteServico {
     void testCarregamentoDAO() {
         assertThat(dao).isNotNull();
     }
-
+    
     /**
      * Testa a inserção de um cliente existente através do serviço.
      */
@@ -59,8 +64,11 @@ class TestClienteServico {
         //Instancia um cliente para testes
         Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
         doReturn(clienteInserir).when(dao).save(any());
+        
+        //Chama o método do serviço
+        boolean retorno = servico.inserir(clienteInserir);
         //Avalia o retorno
-        assertTrue(servico.inserir(clienteInserir));
+        assertTrue(retorno);
     }
        
 
@@ -90,7 +98,8 @@ class TestClienteServico {
             nonNullCopyProperties(aCliente, oCliente);
             //Salva a alteração
             dao.save(oCliente);
-            //Retorno da alteração
+            
+            //Chama o método do serviço
             retornoAlteracao = servico.alterar(clienteInserir);
         }
         //Avalia o retorno
@@ -124,11 +133,49 @@ class TestClienteServico {
             nonNullCopyProperties(aCliente, oCliente);
             //Salva a alteração
             dao.save(oCliente);
-            //Retorno da alteração
+            
+            //Chama o método do serviço
             retornoAlteracao = servico.alterar(clienteInserir);
         }
         //Avalia o retorno
         assertSame(-1, retornoAlteracao);
+    }
+    
+     /**
+     * Testa a exclusão de um cliente existente através do serviço.
+     */        
+    @Test
+    void testExcluirExistente() {
+        //Instancia um cliente para testes
+        Cliente clienteInserir = new Cliente(139, "Cliente Existente", "11111111111");
+        when(dao.existsById(clienteInserir.getClienteId())).thenReturn(true);
+         
+        //Chama o método do serviço
+        int retorno = servico.excluir(clienteInserir);        
+        //Avalia o retorno
+        assertEquals(1,retorno);
+        //Verifica se existe
+        verify(dao).existsById(clienteInserir.getClienteId());
+        //Verifica se o cliente foi excluído
+        verify(dao).deleteById(clienteInserir.getClienteId());
+    }
+     
+    /**
+     * Testa a exclusão de um cliente inexistente através do serviço.
+     */        
+    @Test
+    void testExcluirInexistente() {
+        //Instancia um cliente para testes
+        Cliente clienteInserir1 = new Cliente(139, "Cliente Existente", "11111111111");
+        Cliente clienteInserir2 = new Cliente(140, "Cliente Inexistente", "22222222222");
+        when(dao.existsById(clienteInserir1.getClienteId())).thenReturn(true);
+        
+        //Chama o método do serviço                 
+        int retorno = servico.excluir(clienteInserir2);
+        //Avalia o retorno
+        assertEquals(0,retorno);
+        //Verifica se existe
+        verify(dao).existsById(clienteInserir2.getClienteId());        
     }
 
     /**
@@ -136,9 +183,11 @@ class TestClienteServico {
      */
     @Test
     void testGetClienteIdExiste() {
+        //Cliente para testar a existência
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
-        doReturn(Optional.of(cliente)).when(dao).findById(cliente.getClienteId());
-
+        doReturn(Optional.of(cliente)).when(dao).findById(cliente.getClienteId());       
+        
+        //Chama o método do serviço
         Cliente clienteRetorno = servico.getClientePeloId(cliente.getClienteId());
         //Avalia o retorno
         assertSame(clienteRetorno, cliente);
@@ -151,9 +200,41 @@ class TestClienteServico {
     void testGetClienteIdNaoExiste() {
         Cliente cliente = new Cliente(131, "TesteAlteracao", "11111111111");
         doReturn(Optional.of(cliente)).when(dao).findById(cliente.getClienteId());
-
+        
+        //Chama o método do serviço
         Cliente clienteRetorno = servico.getClientePeloId(141);
         //Avalia o retorno
         assertEquals(null, clienteRetorno);
+    }    
+    
+     /**
+     * Testa a lista de clientes.
+     */
+    @Test
+    void testGetLista() {
+        // Cria a lista de cliente
+        List<Cliente> listaClientes = Arrays.asList(new Cliente(131, "TesteClienteLista1", "11111111111"), new Cliente(132, "TesteClienteLista2", "2222222222"));
+        when(dao.findAll()).thenReturn(listaClientes);
+        
+        //Chama o método do serviço
+        List<Cliente> resultado = servico.getLista();        
+        //Avalia as listas
+        assertEquals(listaClientes, resultado);
+        verify(dao).findAll();
+    }    
+    
+    /**
+     * Testa a contagem de clientes.
+     */
+    @Test
+    void testCount() {
+        //Cria a lista com 5 elementos
+        when(dao.count()).thenReturn(5L);
+        //Chama o método do serviço
+        Long retorno = servico.count();
+        
+        //Avalia o retorno
+        assertEquals(5L, retorno);
+        verify(dao).count();
     }
 }
