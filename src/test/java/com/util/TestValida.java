@@ -43,6 +43,10 @@ class TestValida {
     @ParameterizedTest
     @ValueSource(strings = {"11111111111",  //CPF todos os dígitos iguais
                             "123456",       //CPF sem os onze dígitos
+                            "12345678900",  //CPF com dígitos verificadores 0    
+                            "12345678901",  //CPF com dígitos verificadores 1                            
+                            "12345678910",  //CPF com dígitos verificadores 10
+                            "12345678999",  //CPF com dígitos verificadores 99
                             "12345678908",  //CPF inválido com o primeiro dígito verificador incorreto.
                             "12345678901",  //CPF inválido com o segundo dígito verificador incorreto.
                             "0065XAB22050", //CPF com problema de conversão
