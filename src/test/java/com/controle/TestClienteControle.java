@@ -133,10 +133,10 @@ class TestClienteControle {
         when(servico.inserir(any(Cliente.class))).thenReturn(true);
         
         //Retorno do controle
-        String resultado = controle.clienteIncluir(clienteFrm, model);
+        String retorno = controle.clienteIncluir(clienteFrm, model);
 
         //Avalia os retornos
-        assertEquals("ClienteIncluir", resultado);
+        assertEquals("ClienteIncluir", retorno);
         assertEquals("Inclusão realizada com sucesso.", clienteFrm.getMensagem());
         verify(model).addAttribute("cliente", clienteFrm);
     }
@@ -158,10 +158,10 @@ class TestClienteControle {
         when(servico.inserir(any(Cliente.class))).thenReturn(false);
 
         //Retorno do controle
-        String resultado = controle.clienteIncluir(clienteFrm, model);
+        String retorno = controle.clienteIncluir(clienteFrm, model);
 
         //Avalia os retornos
-        assertEquals("ClienteIncluir", resultado);
+        assertEquals("ClienteIncluir", retorno);
         assertEquals("Inclusão não realizada.", clienteFrm.getMensagem());
         verify(model).addAttribute("cliente", clienteFrm);
     }
@@ -246,10 +246,10 @@ class TestClienteControle {
         when(servico.excluir(any(Cliente.class))).thenReturn(0);
 
         //Retorno do controle
-        String resultado = controle.clienteAlterar(clienteFrm, model);
+        String retorno = controle.clienteAlterar(clienteFrm, model);
 
         //Retorno do controle
-        assertEquals("ClienteAlterar", resultado);
+        assertEquals("ClienteAlterar", retorno);
         assertEquals("Alteração não realizada.", clienteFrm.getMensagem()); 
         verify(model).addAttribute("cliente", clienteFrm);
     }
@@ -333,10 +333,10 @@ class TestClienteControle {
         when(servico.excluir(any(Cliente.class))).thenReturn(0);
 
         //Retorno do controle
-        String resultado = controle.clienteExcluir(clienteFrm, model);
+        String retorno = controle.clienteExcluir(clienteFrm, model);
 
         //Retorno do controle
-        assertEquals("ClienteExcluir", resultado);
+        assertEquals("ClienteExcluir", retorno);
         assertEquals("Exclusão não realizada.", clienteFrm.getMensagem()); 
         verify(model).addAttribute("cliente", clienteFrm);
     }
@@ -373,10 +373,10 @@ class TestClienteControle {
         when(servico.getClientePeloId(131)).thenReturn(cliente);
 
         //Retorno do controle
-        String resultado = controle.clienteConsultar(clienteFrm, model);
+        String retorno = controle.clienteConsultar(clienteFrm, model);
 
         //Avalia os retornos
-        assertEquals("ClienteConsultar", resultado);
+        assertEquals("ClienteConsultar", retorno);
         assertEquals("Cliente encontrado.", clienteFrm.getMensagem());
         //Verifica se o método foi chamado 1 vez
         verify(servico, times(1)).getClientePeloId(131);
@@ -401,10 +401,10 @@ class TestClienteControle {
         when(servico.getClientePeloId(132)).thenReturn(cliente);
 
         //Retorno do controle
-        String resultado = controle.clienteConsultar(clienteFrm, model);
+        String retorno = controle.clienteConsultar(clienteFrm, model);
 
         //Avalia os retornos
-        assertEquals("ClienteConsultar", resultado);
+        assertEquals("ClienteConsultar", retorno);
         assertEquals("Cliente não encontrado.", clienteFrm.getMensagem());
         
         //Se o método nunca foi chamado

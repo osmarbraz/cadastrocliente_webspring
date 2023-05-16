@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,18 +59,39 @@ class TestClienteServico {
     }
     
     /**
-     * Testa a inserção de um cliente existente através do serviço.
+     * Testa a inserção de um cliente através do serviço.
      */
     @Test
-    void testInserir() {
+    void testInserirSucesso() {
         //Instancia um cliente para testes
         Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
-        doReturn(clienteInserir).when(dao).save(any());
+        //doReturn(clienteInserir).when(dao).save(any());
+         when(dao.save(clienteInserir)).thenReturn(clienteInserir);
         
         //Chama o método do serviço
         boolean retorno = servico.inserir(clienteInserir);
+        
         //Avalia o retorno
         assertTrue(retorno);
+        verify(dao, times(1)).save(clienteInserir);
+    }
+    
+     /**
+     * Testa a inserção de um cliente com falha através do serviço.
+     */
+    @Test
+    void testInserirFalha() {
+        //Instancia um cliente para testes
+        Cliente clienteInserir = new Cliente(131, "Cliente Existente", "11111111111");
+        //doReturn(clienteInserir).when(dao).save(any());
+         when(dao.save(clienteInserir)).thenReturn(null);
+        
+        //Chama o método do serviço
+        boolean retorno = servico.inserir(clienteInserir);
+        
+        //Avalia o retorno
+        assertFalse(retorno);
+        verify(dao, times(1)).save(clienteInserir);
     }
        
 
