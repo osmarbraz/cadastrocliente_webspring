@@ -127,7 +127,7 @@ class TestClienteControle {
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
-        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setCpf("84807125206"); // CPF válido
         clienteFrm.setMensagem(null);
         //Simula o cenário de inserção de algum cliente com sucesso(true) no serviço
         when(servico.inserir(any(Cliente.class))).thenReturn(true);
@@ -151,7 +151,7 @@ class TestClienteControle {
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
-        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setCpf("84807125206"); // CPF válido
         clienteFrm.setMensagem(null);       
         
         //Simula o cenário de inserção de algum cliente com falha(false) no serviço
@@ -216,7 +216,7 @@ class TestClienteControle {
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
-        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setCpf("84807125206"); // CPF válido
         clienteFrm.setMensagem(null);
         //Simula o cenário de alteração de algum cliente com sucesso(1) no serviço
         when(servico.alterar(any(Cliente.class))).thenReturn(1);
@@ -240,7 +240,7 @@ class TestClienteControle {
         ClienteFrm clienteFrm = new ClienteFrm();
         clienteFrm.setClienteId(131);
         clienteFrm.setNome("Cliente 131");        
-        clienteFrm.setCpf("11111111111"); // CPF válido
+        clienteFrm.setCpf("84807125206"); // CPF válido
         clienteFrm.setMensagem(null);
         //Simula o cenário de alteração de algum cliente com falha(0) no serviço
         when(servico.excluir(any(Cliente.class))).thenReturn(0);

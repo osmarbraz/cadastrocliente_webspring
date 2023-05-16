@@ -7,47 +7,44 @@ package com.util;
  */
 public class Valida {
 
-    /**
+     /**
      * Valida os digitos verificadores de um CPF.
      *
      * @param cpf Um literal com um cpf de cliente.
      * @return Se o cpf é válido.
      */
-    public boolean validaCPF(String cpf) {
-        boolean retorno = false;
-        if (cpf.length() == 11) {
-            String digitos = cpf.substring(9, 11);
-            int soma = 0;
-            int multiplicacao = 11;
-            int[] valores = new int[11];
-            // Recebe os números e realiza a multiplicação e soma.   
-            for (int i = 0; i < 9; i++) {
-                valores[i] = Integer.parseInt("" + cpf.charAt(i));
-                soma += (valores[i] * --multiplicacao);
-            }
-            // Cria o primeiro dígito verificador.   
-            int resto = soma % 11;
-            if (resto < 2) {
-                valores[9] = 0;
-            } else {
-                valores[9] = 11 - resto;
-            }
-            // Reinicia os valores.   
-            soma = 0;
-            multiplicacao = 11;
-            // Realiza a multiplicação e soma do segundo dígito.   
-            for (int i = 0; i < 10; i++) {
-                soma += valores[i] * multiplicacao--;
-            }
-            // Cria o segundo dígito verificador.   
-            resto = soma % 11;
-            valores[10] = 11 - resto;
-
-            if ((digitos.substring(0, 1).equalsIgnoreCase(Integer.toString(valores[9])))
-                    && (digitos.substring(1, 2).equalsIgnoreCase(Integer.toString(valores[10])))) {
-                retorno = true;
-            }
+     public boolean validaCPF(String cpf) {        
+        //Verifica o tamanho do cpf
+        if (cpf == null || cpf.length() != 11 || cpf.matches(cpf.charAt(0) + "{11}")) {
+            return false;
         }
-        return retorno;
+        
+        int[] numeros = new int[11];
+        for (int i = 0; i < 11; i++) {
+            numeros[i] = Character.getNumericValue(cpf.charAt(i));
+        }
+
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += numeros[i] * (10 - i);
+        }
+        //Avalia o primeiro digito verificador
+        int restoDivisao = soma % 11;
+        int primeiroDigitoVerificador = restoDivisao < 2 ? 0 : 11 - restoDivisao;
+
+        if (numeros[9] != primeiroDigitoVerificador) {
+            return false;
+        }
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += numeros[i] * (11 - i);
+        }
+
+        //Avalia o segundo digito verificador
+        restoDivisao = soma % 11;
+        int segundoDigitoVerificador = restoDivisao < 2 ? 0 : 11 - restoDivisao;
+
+        return numeros[10] == segundoDigitoVerificador;
     }
 }

@@ -27,7 +27,7 @@ class TestValida {
      * Utiliza testes parametrizados.
      */
     @ParameterizedTest
-    @ValueSource(strings = {"11111111111", "84807125206", "63883136395"})
+    @ValueSource(strings = {"84807125206", "63883136395"})
     void testCPFValido(String cpf) {
                   
         boolean retorno = valida.validaCPF(cpf);
