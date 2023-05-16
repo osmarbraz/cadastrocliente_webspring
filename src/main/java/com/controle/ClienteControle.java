@@ -231,10 +231,8 @@ public class ClienteControle {
     @ResponseBody   //Usa a biblioteca Jackson para retornar o objeto em JSON
     @GetMapping("/clientes")
     public List<Cliente> getLista() {
-        //Recupera a lista de clientes
-        List<Cliente> clientes = (List<Cliente>)clienteDAO.findAll();
-        //Retorna a lista de clientes
-	return clientes;
+        //Recupera e retorna a lista de clientes
+	return (List<Cliente>)clienteDAO.findAll();
     }    
     
     /**
