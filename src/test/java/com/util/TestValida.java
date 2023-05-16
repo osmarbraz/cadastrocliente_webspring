@@ -1,6 +1,5 @@
 package com.util;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -24,6 +23,8 @@ class TestValida {
 
     /**
      * Testa CPFs válidos.
+     * 
+     * Utiliza testes parametrizados.
      */
     @ParameterizedTest
     @ValueSource(strings = {"11111111111", "84807125206", "63883136395"})
@@ -36,6 +37,8 @@ class TestValida {
     
     /**
      * Testa CPFs inválidos.
+     * 
+     * Utiliza testes parametrizados.
      */
     @ParameterizedTest
     @ValueSource(strings = {"123456",       //CPF sem os onze dígitos
