@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestValida {
@@ -21,102 +23,34 @@ class TestValida {
     }
 
     /**
-     * Testa CPF válido.
+     * Testa CPFs válidos.
      */
-    @Test
-    void testCPFValido1() {
-        String cpfValido = "11111111111";
+    @ParameterizedTest
+    @ValueSource(strings = {"11111111111", "84807125206", "63883136395"})
+    void testCPFValido(String cpf) {
                   
-        boolean retorno = valida.validaCPF(cpfValido);
+        boolean retorno = valida.validaCPF(cpf);
         
         assertTrue(retorno);
     }
-
+    
     /**
-     * Testa CPF válido.
+     * Testa CPFs inválidos.
      */
-    @Test
-    void testCPFValido2() {
-        String cpfValido = "84807125206";
+    @ParameterizedTest
+    @ValueSource(strings = {"123456",       //CPF sem os onze dígitos
+                            "12345678908",  //CPF inválido com o primeiro dígito verificador incorreto.
+                            "12345678901",  //CPF inválido com o segundo dígito verificador incorreto.
+                            "0065XAB22050", //CPF com problema de conversão
+                            ""}             //CPF Vazio
+                            )
+    void testCPFInvalido(String cpf) {
                   
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertTrue(retorno);
-    }
-
-    /**
-     * Testa CPF válido.
-     */
-    @Test
-    void testCPFValido3() {        
-        String cpfValido = "63883136395";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertTrue(retorno);
-    }
-
-    /**
-     * Testa CPF inválido sem os 11 digítos.
-     */
-    @Test
-    void testValidaCPFInvalidoSemOnzeDigitos() {
-        String cpfValido = "123456";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
+        boolean retorno = valida.validaCPF(cpf);
         
         assertFalse(retorno);
     }
     
-    /**
-     * Testa CPF inválido com o primeiro dígito verificador incorreto.
-     */
-    @Test
-    void testValidaCPFInvalidoPrimeiroVerificadorIncorreto() {
-        String cpfValido = "12345678908";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertFalse(retorno);
-    }
-    
-    /**
-     * Testa CPF inválido com o segundo dígito verificador incorreto.
-     */
-    @Test
-    void testValidaCPFInvalidoSegundoVerificadorIncorreto() {
-        String cpfValido = "12345678901";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertFalse(retorno);
-    }
-
-    /**
-     * Testa CPF vazio.
-     */
-    @Test
-    void testValidaCPFInvalidoVazio() {
-        String cpfValido = "";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertFalse(retorno);
-    }
-    
-    /**
-     * Testa CPF com problema na conversão.
-     */
-    @Test
-    void testValidaCPFInvalidoProblemaConversao() {
-        //CPF com problema na conversão
-        String cpfValido = "0065XAB22050";
-                  
-        boolean retorno = valida.validaCPF(cpfValido);
-        
-        assertFalse(retorno);
-    }
-
     /**
      * Finaliza a classe de validação.
      */
