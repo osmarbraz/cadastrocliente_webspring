@@ -15,36 +15,41 @@ public class Valida {
      */
      public boolean validaCPF(String cpf) {        
         //Verifica o tamanho do cpf
-        if (cpf == null || cpf.length() != 11 || cpf.matches(cpf.charAt(0) + "{11}")) {
+        if (cpf == null || cpf.length() != 11 || cpf.matches(cpf.charAt(0) + "{11}")) {        
             return false;
-        }
-        
+        }         
+
+        //Converte cada caracter para número
         int[] numeros = new int[11];
         for (int i = 0; i < 11; i++) {
             numeros[i] = Character.getNumericValue(cpf.charAt(i));
         }
 
+        //Avalia o primeiro digito verificador
         int soma = 0;
         for (int i = 0; i < 9; i++) {
             soma += numeros[i] * (10 - i);
-        }
-        //Avalia o primeiro digito verificador
+        }        
         int restoDivisao = soma % 11;
-        int primeiroDigitoVerificador = restoDivisao < 2 ? 0 : 11 - restoDivisao;
-
+        int primeiroDigitoVerificador = 11 - restoDivisao;
+        if (restoDivisao < 2) {
+            primeiroDigitoVerificador = 0;
+        }
         if (numeros[9] != primeiroDigitoVerificador) {
             return false;
         }
 
+        //Avalia o segundo digito verificador
         soma = 0;
         for (int i = 0; i < 10; i++) {
-            soma += numeros[i] * (11 - i);
+            soma = soma + numeros[i] * (11 - i);
         }
-
-        //Avalia o segundo digito verificador
         restoDivisao = soma % 11;
-        int segundoDigitoVerificador = restoDivisao < 2 ? 0 : 11 - restoDivisao;
-
+        int segundoDigitoVerificador = 11 - restoDivisao;
+        //Não entra nesta condição
+//      if (restoDivisao < 2) {
+//          segundoDigitoVerificador = 0;
+//       }
         return numeros[10] == segundoDigitoVerificador;
     }
 }
