@@ -3,11 +3,11 @@ package com.util;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestValida {
@@ -15,7 +15,7 @@ class TestValida {
     private Valida valida = null;
 
     /**
-     * Instância uma classe de validação.
+     * Instância uma classe de validação para ser utilizada nos testes.
      */
     @BeforeAll
     void inicializa() {
@@ -64,7 +64,7 @@ class TestValida {
     }
     
     /**
-     * Teste CPF inválido nulo.
+     * Teste CPF com valor nulo.
      * 
      */
     @Test

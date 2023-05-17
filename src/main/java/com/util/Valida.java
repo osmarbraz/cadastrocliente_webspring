@@ -46,10 +46,7 @@ public class Valida {
         }
         restoDivisao = soma % 11;
         int segundoDigitoVerificador = 11 - restoDivisao;
-        //Não entra nesta condição
-//      if (restoDivisao < 2) {
-//          segundoDigitoVerificador = 0;
-//       }
+        
         return numeros[10] == segundoDigitoVerificador;
     }
 }
