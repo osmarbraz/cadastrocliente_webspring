@@ -101,7 +101,7 @@ jobs:
     - name: Crie uma pasta temporária(stating) de downloads de artefatos
       run: mkdir staging
     - name: Copia os artefatos a serem publicados na pasta temporária(stating)
-      run: cp target/*jar staging
+      run: cp target/*.war staging
     - name: Usa Upload Artifact do GitHub Action
       uses: actions/upload-artifact@v3
       with:
