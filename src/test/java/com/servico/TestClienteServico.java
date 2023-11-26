@@ -1,8 +1,5 @@
 package com.servico;
 
-import com.dao.ClienteDAO;
-import com.entidade.Cliente;
-
 import org.junit.jupiter.api.Test;
 import static com.util.Util.nonNullCopyProperties;
 import java.util.Arrays;
@@ -21,6 +18,9 @@ import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.dao.ClienteDAO;
+import com.entidade.Cliente;
 
 @SpringBootTest
 class TestClienteServico {

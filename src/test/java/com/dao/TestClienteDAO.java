@@ -1,8 +1,5 @@
 package com.dao;
 
-import com.entidade.Cliente;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +13,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
+
+import com.entidade.Cliente;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
