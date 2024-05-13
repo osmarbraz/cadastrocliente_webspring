@@ -29,4 +29,4 @@ Os dados de configuração (Servidor, Database, Usuario, Senha) da integração 
 A pasta test contêm os testes unitários do projeto utilizando JUnit 5.<br> 
 Os testes são realizados no SO ubuntu-lastest e JDK 18.<br>
 A cobertura do código é realizada através do JaCoCo e relatório enviado para o Sonarcloud.<br>
-Distribuição para Docker Hub. 
+Distribuição para Docker Hub.  
