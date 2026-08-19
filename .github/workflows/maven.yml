@@ -72,7 +72,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=osmarbraz_cadastrocliente_webspring org.jacoco:jacoco-maven-plugin:prepare-agent -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
   
-  # Jobs do ambiente de produção
+  # Jobs do ambiente de produto
   build-prd:
     # Runner com uma instância do ubuntu        
     runs-on: ubuntu-latest
@@ -81,7 +81,7 @@ jobs:
     needs: build-hmg
     steps:
     # Utiliza a action checkout para fazer o git clone no runner    
-    - name: Realiza o checkout do repositório
+    - name: Realiza o checkout do reposit�rio
       uses: actions/checkout@v5
     # Utiliza a action setup-java para configurar a versão necessária do JDK
     - name: Configura o JDK 18
@@ -91,14 +91,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
     # Executa o empacotamento do projeto com o Maven no runner    
-    # O parâmetro -DskipTests pula os testes pois já foram executados no ambiente anterior.
+    # O par�metro -DskipTests pula os testes pois já foram executados no ambiente anterior.
     - name: Empacota o projeto com Maven, cria a imagem docker e envia imagem para dockerhub.
       env:
         DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
         DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
       run: mvn -B package --file pom.xml jib:build -DskipTests
     # Cria o artefato de download    
-    - name: Crie uma pasta temporária(stating) de downloads de artefatos
+    - name: Crie uma pasta tempor�ria(stating) de downloads de artefatos
       run: mkdir staging
     - name: Copia os artefatos a serem publicados na pasta temporária(stating)
       run: cp target/*.jar staging
